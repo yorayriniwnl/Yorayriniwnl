@@ -201,7 +201,7 @@ Whatever the domain — the standard doesn't change.
 |:--|:--|
 | **Open to** | Full-time &ensp;·&ensp; Contract &ensp;·&ensp; Remote |
 | **Timezone** | IST — UTC +5:30 &ensp;·&ensp; flexible overlap |
-| **Resume** | [view online](https://yorayriniwnl.vercel.app/resume) &ensp;·&ensp; [download pdf](https://yorayriniwnl.vercel.app/resume.pdf) |
+| **Resume** | [view online](https://yorayriniwnl.vercel.app/resume) &ensp;·&ensp;) |
 | **Write me** | [yorayriniwnl@gmail.com](mailto:yorayriniwnl@gmail.com) &ensp;·&ensp; [linkedin](https://linkedin.com/in/yorayriniwnl) |
 
 <br/>
