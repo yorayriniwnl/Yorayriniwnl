@@ -71,7 +71,7 @@ Whatever the domain — the standard doesn't change.
 
 <br/>
 
-**`☀` &ensp; Zenith** &ensp;·&ensp; *Solar Planning System*
+**`☀` &ensp; Yor-Zenith** &ensp;·&ensp; *Solar Planning System*
 
 <sub>A complex domain made navigable. Rooftop feasibility, yield simulation, spatial queries, and full reporting — unified into something a person can actually reason with. Not a dashboard. A decision engine.</sub>
 
