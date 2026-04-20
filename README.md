@@ -4,23 +4,17 @@
 
 <br/>
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=EB+Garamond&weight=400&size=20&pause=1600&color=c9a0b4&center=true&vCenter=true&width=640&lines=I+build+things+that+feel+alive.;Systems+with+soul%2C+surfaces+with+intent.;Every+line+of+code+chosen+with+care.;Open+to+what+comes+next.)](https://yorayriniwnl.vercel.app)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=EB+Garamond&weight=400&size=22&pause=1800&color=c9a0b4&center=true&vCenter=true&width=680&lines=I+build+things+that+feel+alive.;Systems+with+soul%2C+surfaces+with+intent.;Every+line+of+code+chosen+with+care.;Open+to+what+comes+next.)](https://www.yorayriniwnl.in)
 
 <br/>
 
-[![](https://img.shields.io/badge/-portfolio-0d0018?style=for-the-badge&logo=vercel&logoColor=f4a7c3&labelColor=0d0018)](https://yorayriniwnl.vercel.app)&ensp;[![](https://img.shields.io/badge/-linkedin-0d0018?style=for-the-badge&logo=linkedin&logoColor=f4a7c3&labelColor=0d0018)](https://linkedin.com/in/yorayriniwnl)&ensp;[![](https://img.shields.io/badge/-resume-0d0018?style=for-the-badge&logo=adobeacrobatreader&logoColor=f4a7c3&labelColor=0d0018)](https://yorayriniwnl.vercel.app/resume.pdf)&ensp;[![](https://img.shields.io/badge/-hire%20me-0d0018?style=for-the-badge&logo=gmail&logoColor=f4a7c3&labelColor=0d0018)](mailto:yorayriniwnl@gmail.com)
+[![](https://img.shields.io/badge/-portfolio-0d0018?style=for-the-badge&logo=vercel&logoColor=f4a7c3&labelColor=0d0018)](https://www.yorayriniwnl.in)&ensp;[![](https://img.shields.io/badge/-linkedin-0d0018?style=for-the-badge&logo=linkedin&logoColor=f4a7c3&labelColor=0d0018)](https://linkedin.com/in/yorayriniwnl)&ensp;[![](https://img.shields.io/badge/-resume-0d0018?style=for-the-badge&logo=adobeacrobatreader&logoColor=f4a7c3&labelColor=0d0018)](https://www.yorayriniwnl.in/resume.pdf)&ensp;[![](https://img.shields.io/badge/-hire%20me-0d0018?style=for-the-badge&logo=gmail&logoColor=f4a7c3&labelColor=0d0018)](mailto:yorayriniwnl@gmail.com)
 
 </div>
 
 <br/>
 
 <div align="center">
-
-✦ &emsp; ✦ &emsp; ✦
-
-</div>
-
-<br/>
 
 ```
 Some people write to be understood.
@@ -29,9 +23,11 @@ interfaces that breathe,
 and systems that don't ask to be forgiven.
 ```
 
+</div>
+
 <br/>
 
-I'm **Ayush Roy**. Full-stack developer with a product mind and an obsession with doing things properly.
+I'm **Ayush Roy** — full-stack developer, product thinker, detail obsessive.
 Solar simulators. AI classifiers. Real-time 3D. Knowledge systems in Rust.
 Whatever the domain — the standard doesn't change.
 
@@ -39,13 +35,13 @@ Whatever the domain — the standard doesn't change.
 
 <br/>
 
----
-
-<br/>
-
 <div align="center">
 
-*✦ &ensp; selected work &ensp; ✦*
+```
+╔══════════════════════════════════════════╗
+║         s e l e c t e d   w o r k       ║
+╚══════════════════════════════════════════╝
+```
 
 </div>
 
@@ -53,22 +49,23 @@ Whatever the domain — the standard doesn't change.
 
 <table width="100%">
 <tr>
-<td width="50%" valign="top" style="padding:16px">
+<td width="50%" valign="top">
 
 <br/>
 
 **`☀` &ensp; Zenith** &ensp;·&ensp; *Solar Planning System*
 
-<sub>A complex domain made navigable. Rooftop feasibility, yield simulation, spatial queries, and reporting — unified into something a person can actually reason with.</sub>
+<sub>A complex domain made navigable. Rooftop feasibility, yield simulation, spatial queries, and full reporting — unified into something a person can actually reason with. Not a dashboard. A decision engine.</sub>
 
 <br/>
 
-![](https://img.shields.io/badge/TypeScript-0d0018?style=flat-square&logo=typescript&logoColor=f4a7c3)
-![](https://img.shields.io/badge/Next.js-0d0018?style=flat-square&logo=nextdotjs&logoColor=f4a7c3)
-![](https://img.shields.io/badge/PostGIS-0d0018?style=flat-square&logo=postgresql&logoColor=f4a7c3)
-![](https://img.shields.io/badge/Python-0d0018?style=flat-square&logo=python&logoColor=f4a7c3)
+![TypeScript](https://img.shields.io/badge/TypeScript-0d0018?style=flat-square&logo=typescript&logoColor=f4a7c3)
+![Next.js](https://img.shields.io/badge/Next.js-0d0018?style=flat-square&logo=nextdotjs&logoColor=f4a7c3)
+![PostGIS](https://img.shields.io/badge/PostGIS-0d0018?style=flat-square&logo=postgresql&logoColor=f4a7c3)
+![Python](https://img.shields.io/badge/Python-0d0018?style=flat-square&logo=python&logoColor=f4a7c3)
+![Three.js](https://img.shields.io/badge/Three.js-0d0018?style=flat-square&logo=threedotjs&logoColor=f4a7c3)
 
-[**→ case study**](https://yorayriniwnl.vercel.app/projects/zenith) &ensp; [**→ repo**](https://github.com/yorayriniwnl/zenith)
+[**→ case study**](https://www.yorayriniwnl.in/projects/zenith) &ensp; [**→ repo**](https://github.com/yorayriniwnl/project-zenith)
 
 <br/>
 
@@ -79,15 +76,16 @@ Whatever the domain — the standard doesn't change.
 
 **`🤖` &ensp; AI vs Real** &ensp;·&ensp; *Image Classifier*
 
-<sub>A moderation pipeline that knows what it's looking at. Synthetic or real — classified with explainability. Containerized. Production-ready. Honest about its reasoning.</sub>
+<sub>A moderation pipeline that knows what it's looking at. Synthetic or real — classified with explainability via LBP/GLCM texture features and an SVM that earns its confidence score. Containerized. Production-ready.</sub>
 
 <br/>
 
-![](https://img.shields.io/badge/PyTorch-0d0018?style=flat-square&logo=pytorch&logoColor=f4a7c3)
-![](https://img.shields.io/badge/FastAPI-0d0018?style=flat-square&logo=fastapi&logoColor=f4a7c3)
-![](https://img.shields.io/badge/Docker-0d0018?style=flat-square&logo=docker&logoColor=f4a7c3)
+![PyTorch](https://img.shields.io/badge/Python-0d0018?style=flat-square&logo=python&logoColor=f4a7c3)
+![OpenCV](https://img.shields.io/badge/OpenCV-0d0018?style=flat-square&logo=opencv&logoColor=f4a7c3)
+![FastAPI](https://img.shields.io/badge/Streamlit-0d0018?style=flat-square&logo=streamlit&logoColor=f4a7c3)
+![Docker](https://img.shields.io/badge/Scikit--Learn-0d0018?style=flat-square&logo=scikitlearn&logoColor=f4a7c3)
 
-[**→ case study**](https://yorayriniwnl.vercel.app/projects/ai-detector) &ensp; [**→ repo**](https://github.com/yorayriniwnl/ai-detector)
+[**→ case study**](https://www.yorayriniwnl.in/projects/ai-detector) &ensp; [**→ repo**](https://github.com/yorayriniwnl/Ai-vs-real-image)
 
 <br/>
 
@@ -100,15 +98,16 @@ Whatever the domain — the standard doesn't change.
 
 **`🧠` &ensp; Yor-Smriti** &ensp;·&ensp; *Knowledge System*
 
-<sub>Built to remember things the way memory should. Rust for the engine — fast, persistent, unforgiving. TypeScript for the surface — quiet and precise.</sub>
+<sub>Built to remember things the way memory should. A narrative-first web experience for timelines, private storytelling, and emotionally aware UI — backed by a TypeScript engine that doesn't apologise for being precise.</sub>
 
 <br/>
 
-![](https://img.shields.io/badge/Rust-0d0018?style=flat-square&logo=rust&logoColor=f4a7c3)
-![](https://img.shields.io/badge/SQLite-0d0018?style=flat-square&logo=sqlite&logoColor=f4a7c3)
-![](https://img.shields.io/badge/TypeScript-0d0018?style=flat-square&logo=typescript&logoColor=f4a7c3)
+![Rust](https://img.shields.io/badge/TypeScript-0d0018?style=flat-square&logo=typescript&logoColor=f4a7c3)
+![SQLite](https://img.shields.io/badge/JavaScript-0d0018?style=flat-square&logo=javascript&logoColor=f4a7c3)
+![TypeScript](https://img.shields.io/badge/CSS-0d0018?style=flat-square&logo=css3&logoColor=f4a7c3)
+![Vercel](https://img.shields.io/badge/Vercel-0d0018?style=flat-square&logo=vercel&logoColor=f4a7c3)
 
-[**→ case study**](https://yorayriniwnl.vercel.app/projects/yor-smriti) &ensp; [**→ repo**](https://github.com/yorayriniwnl/Yor-Smriti)
+[**→ case study**](https://www.yorayriniwnl.in/projects/yor-smriti) &ensp; [**→ repo**](https://github.com/yorayriniwnl/Yor-Smriti)
 
 <br/>
 
@@ -117,17 +116,18 @@ Whatever the domain — the standard doesn't change.
 
 <br/>
 
-**`🌐` &ensp; Neo Sculpt** &ensp;·&ensp; *3D Browser Studio*
+**`⚡` &ensp; Yor-Helios** &ensp;·&ensp; *Energy Monitoring Platform*
 
-<sub>Real-time sculpting and exploration, directly in the browser. The kind of experiment that only makes sense if you're genuinely in love with what WebGL can do.</sub>
+<sub>FastAPI ingestion, anomaly detection, WebSocket alerts, map visualisations, and a Next.js dashboard that updates before you think to refresh. Built for systems that can't afford to miss a signal.</sub>
 
 <br/>
 
-![](https://img.shields.io/badge/Three.js-0d0018?style=flat-square&logo=threedotjs&logoColor=f4a7c3)
-![](https://img.shields.io/badge/WebGL-0d0018?style=flat-square&logo=webgl&logoColor=f4a7c3)
-![](https://img.shields.io/badge/TypeScript-0d0018?style=flat-square&logo=typescript&logoColor=f4a7c3)
+![FastAPI](https://img.shields.io/badge/FastAPI-0d0018?style=flat-square&logo=fastapi&logoColor=f4a7c3)
+![Next.js](https://img.shields.io/badge/Next.js-0d0018?style=flat-square&logo=nextdotjs&logoColor=f4a7c3)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-0d0018?style=flat-square&logo=postgresql&logoColor=f4a7c3)
+![Docker](https://img.shields.io/badge/Docker-0d0018?style=flat-square&logo=docker&logoColor=f4a7c3)
 
-[**→ case study**](https://yorayriniwnl.vercel.app/projects/neo-sculpt) &ensp; [**→ repo**](https://github.com/yorayriniwnl/neo-sculpt)
+[**→ case study**](https://www.yorayriniwnl.in/projects/yor-helios)
 
 <br/>
 
@@ -137,41 +137,48 @@ Whatever the domain — the standard doesn't change.
 
 <br/>
 
----
-
-<br/>
-
 <div align="center">
 
-*✦ &ensp; the craft &ensp; ✦*
+```
+╔══════════════════════════════════════════╗
+║           t h e   c r a f t             ║
+╚══════════════════════════════════════════╝
+```
 
 <br/>
 
-![](https://img.shields.io/badge/TypeScript-Expert-0d0018?style=flat-square&logo=typescript&logoColor=f4a7c3)&ensp;
-![](https://img.shields.io/badge/React-Expert-0d0018?style=flat-square&logo=react&logoColor=f4a7c3)&ensp;
-![](https://img.shields.io/badge/Next.js-Expert-0d0018?style=flat-square&logo=nextdotjs&logoColor=f4a7c3)&ensp;
-![](https://img.shields.io/badge/Tailwind-Advanced-0d0018?style=flat-square&logo=tailwindcss&logoColor=f4a7c3)&ensp;
-![](https://img.shields.io/badge/Three.js-Proficient-0d0018?style=flat-square&logo=threedotjs&logoColor=f4a7c3)
+![TypeScript](https://img.shields.io/badge/TypeScript-Expert-0d0018?style=flat-square&logo=typescript&logoColor=f4a7c3)&ensp;
+![React](https://img.shields.io/badge/React-Expert-0d0018?style=flat-square&logo=react&logoColor=f4a7c3)&ensp;
+![Next.js](https://img.shields.io/badge/Next.js-Expert-0d0018?style=flat-square&logo=nextdotjs&logoColor=f4a7c3)&ensp;
+![Tailwind](https://img.shields.io/badge/Tailwind-Advanced-0d0018?style=flat-square&logo=tailwindcss&logoColor=f4a7c3)&ensp;
+![Three.js](https://img.shields.io/badge/Three.js-Proficient-0d0018?style=flat-square&logo=threedotjs&logoColor=f4a7c3)
 
 <br/>
 
-![](https://img.shields.io/badge/Node.js-Advanced-0d0018?style=flat-square&logo=nodedotjs&logoColor=f4a7c3)&ensp;
-![](https://img.shields.io/badge/Python-Advanced-0d0018?style=flat-square&logo=python&logoColor=f4a7c3)&ensp;
-![](https://img.shields.io/badge/Rust-Proficient-0d0018?style=flat-square&logo=rust&logoColor=f4a7c3)&ensp;
-![](https://img.shields.io/badge/PostgreSQL-Advanced-0d0018?style=flat-square&logo=postgresql&logoColor=f4a7c3)&ensp;
-![](https://img.shields.io/badge/Docker-Advanced-0d0018?style=flat-square&logo=docker&logoColor=f4a7c3)
+![Node.js](https://img.shields.io/badge/Node.js-Advanced-0d0018?style=flat-square&logo=nodedotjs&logoColor=f4a7c3)&ensp;
+![Python](https://img.shields.io/badge/Python-Advanced-0d0018?style=flat-square&logo=python&logoColor=f4a7c3)&ensp;
+![FastAPI](https://img.shields.io/badge/FastAPI-Advanced-0d0018?style=flat-square&logo=fastapi&logoColor=f4a7c3)&ensp;
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Advanced-0d0018?style=flat-square&logo=postgresql&logoColor=f4a7c3)&ensp;
+![Docker](https://img.shields.io/badge/Docker-Advanced-0d0018?style=flat-square&logo=docker&logoColor=f4a7c3)
+
+<br/>
+
+![Rust](https://img.shields.io/badge/Rust-Proficient-0d0018?style=flat-square&logo=rust&logoColor=f4a7c3)&ensp;
+![OpenCV](https://img.shields.io/badge/OpenCV-Proficient-0d0018?style=flat-square&logo=opencv&logoColor=f4a7c3)&ensp;
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-Proficient-0d0018?style=flat-square&logo=scikitlearn&logoColor=f4a7c3)&ensp;
+![WebGL](https://img.shields.io/badge/WebGL-Proficient-0d0018?style=flat-square&logo=webgl&logoColor=f4a7c3)
 
 </div>
 
 <br/>
 
----
-
-<br/>
-
 <div align="center">
 
-*✦ &ensp; on record &ensp; ✦*
+```
+╔══════════════════════════════════════════╗
+║           o n   r e c o r d             ║
+╚══════════════════════════════════════════╝
+```
 
 <br/>
 
@@ -189,19 +196,18 @@ Whatever the domain — the standard doesn't change.
 
 ---
 
-<br/>
-
 <div align="center">
 
 *The right problem. The right team. The right moment.*
 
 <br/>
 
-| &ensp; | &ensp; |
+| | |
 |:--|:--|
 | **Open to** | Full-time &ensp;·&ensp; Contract &ensp;·&ensp; Remote |
 | **Timezone** | IST — UTC +5:30 &ensp;·&ensp; flexible overlap |
-| **Resume** | [view online](https://yorayriniwnl.vercel.app/resume) &ensp;&ensp; |
+| **Portfolio** | [www.yorayriniwnl.in](https://www.yorayriniwnl.in) |
+| **Resume** | [view / download](https://www.yorayriniwnl.in/resume.pdf) |
 | **Write me** | [yorayriniwnl@gmail.com](mailto:yorayriniwnl@gmail.com) &ensp;·&ensp; [linkedin](https://linkedin.com/in/yorayriniwnl) |
 
 <br/>
