@@ -71,7 +71,7 @@ Whatever the domain — the standard doesn't change.
 
 <br/>
 
-**`☀` &ensp; Yor-Zenith** &ensp;·&ensp; *Solar Planning System*
+**`☀` &ensp; Yor Zenith** &ensp;·&ensp; *Solar Planning System*
 
 <sub>A complex domain made navigable. Rooftop feasibility, yield simulation, spatial queries, and full reporting — unified into something a person can actually reason with. Not a dashboard. A decision engine.</sub>
 
@@ -92,7 +92,7 @@ Whatever the domain — the standard doesn't change.
 
 <br/>
 
-**`🤖` &ensp; AI vs Real** &ensp;·&ensp; *Image Classifier*
+**`🤖` &ensp; Yor AI vs Real** &ensp;·&ensp; *Image Classifier*
 
 <sub>A moderation pipeline that knows what it's looking at. Synthetic or real — classified with LBP/GLCM texture features and an SVM that earns its confidence score. Containerised. Production-ready. Honest about its reasoning.</sub>
 
@@ -114,7 +114,7 @@ Whatever the domain — the standard doesn't change.
 
 <br/>
 
-**`🧠` &ensp; Yor-Smriti** &ensp;·&ensp; *Knowledge System*
+**`🧠` &ensp; Yor Smriti** &ensp;·&ensp; *Knowledge System*
 
 <sub>Built to remember things the way memory should. Narrative-first web experience for timelines and private storytelling — backed by an engine that doesn't apologise for being precise.</sub>
 
@@ -134,7 +134,7 @@ Whatever the domain — the standard doesn't change.
 
 <br/>
 
-**`⚡` &ensp; Yor-Helios** &ensp;·&ensp; *Energy Monitoring Platform*
+**`⚡` &ensp; Yor Helios** &ensp;·&ensp; *Energy Monitoring Platform*
 
 <sub>FastAPI ingestion, anomaly detection, WebSocket alerts, and a Next.js dashboard that updates before you think to refresh. Built for systems that cannot afford to miss a signal.</sub>
 
