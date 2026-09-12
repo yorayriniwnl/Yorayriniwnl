@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<a href="https://www.yorayriniwnl.in"><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/hero.svg?rev=career-v1" width="100%" alt="Ayush Roy, Associate Engineer · Automotive Industry and Applied ML Builder"/></a>
+<a href="https://www.yorayriniwnl.in"><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/hero.svg?rev=career-v1" width="100%" alt="Ayush Roy, Associate Engineer · Automotive Technology Services and Applied ML Builder"/></a>
 
 <p align="center">
 <a href="#user-content-selected-systems"><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/jump-projects.svg?rev=redline-v2" width="145" alt="Jump to selected projects"/></a>
@@ -11,7 +11,7 @@
 <a href="#user-content-open-channel"><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/jump-contact.svg?rev=redline-v2" width="145" alt="Jump to contact and collaboration"/></a>
 </p>
 
-<picture><source media="(max-width: 600px)" srcset="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/identity-console-mobile.svg?rev=career-v1"/><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/identity-console.svg?rev=career-v1" width="100%" alt="Currently Associate Engineer · Automotive Industry. I build ambitious product systems where polished interfaces meet realtime backends, applied machine learning, and the physical world. Open to jobs. Bengaluru (Bangalore), Karnataka, India."/></picture>
+<picture><source media="(max-width: 600px)" srcset="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/identity-console-mobile.svg?rev=career-v1"/><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/identity-console.svg?rev=career-v1" width="100%" alt="Currently Associate Engineer · Automotive Technology Services. I build ambitious product systems where polished interfaces meet realtime backends, applied machine learning, and the physical world. Open to jobs. Bengaluru (Bangalore), Karnataka, India."/></picture>
 
 <p align="center">
 <a href="https://www.yorayriniwnl.in"><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/nav-portfolio.svg?rev=redline-v2" width="145" alt="Open Ayush Roy portfolio"/></a>

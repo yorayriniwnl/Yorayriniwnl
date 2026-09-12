@@ -67,7 +67,7 @@ class ProfileDataTests(unittest.TestCase):
         self.assertNotIn("7.00/10", serialized)
 
     def test_current_role_and_availability_match_user_update(self):
-        self.assertEqual(self.profile['identity']['role'], 'Associate Engineer · Automotive Industry')
+        self.assertEqual(self.profile['identity']['role'], 'Associate Engineer · Automotive Technology Services')
         self.assertEqual(self.profile['availability']['status'], 'Open to jobs')
 
     def test_applied_ml_claim_matches_resume_evidence(self):

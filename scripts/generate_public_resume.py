@@ -56,6 +56,11 @@ def wrapped_lines(text: str, font: str, size: float, width: float) -> list[str]:
     return lines
 
 
+def header_lines(profile: dict) -> tuple[str, str]:
+    identity = profile["identity"]
+    return identity["role"].upper(), f'/ {identity["specialty"].upper()}'
+
+
 def fitted_font_size(
     text: str,
     font: str,
@@ -149,10 +154,13 @@ def build_resume(raw_output: Path) -> None:
     pdf.setFont(bold, 28)
     pdf.drawString(margin, height - 52, profile["identity"]["name"].upper())
     header_right_x = 357
-    header = f'{profile["identity"]["role"].upper()}  /  {profile["identity"]["specialty"].upper()}'
+    header_role, header_specialty = header_lines(profile)
+    header_width = header_right_x - margin - 10
     pdf.setFillColor(CRIMSON)
-    pdf.setFont(bold, fitted_font_size(header, bold, header_right_x - margin - 10, 10))
-    pdf.drawString(margin, height - 70, header)
+    pdf.setFont(bold, fitted_font_size(header_role, bold, header_width, 10))
+    pdf.drawString(margin, height - 70, header_role)
+    pdf.setFont(bold, fitted_font_size(header_specialty, bold, header_width, 8.2))
+    pdf.drawString(margin, height - 80, header_specialty)
 
     pdf.setFillColor(MUTED)
     pdf.setFont(regular, 7.4)

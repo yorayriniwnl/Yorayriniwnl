@@ -35,9 +35,11 @@ class PublicResumeTests(unittest.TestCase):
     def test_header_role_line_stays_clear_of_contact_column(self):
         _, bold = resume.register_fonts()
         profile = resume.load_profile()
-        header = f'{profile["identity"]["role"].upper()}  /  {profile["identity"]["specialty"].upper()}'
-        size = resume.fitted_font_size(header, bold, max_width=313, start_size=10)
-        self.assertLessEqual(resume.pdfmetrics.stringWidth(header, bold, size), 313)
+        role_line, specialty_line = resume.header_lines(profile)
+        role_size = resume.fitted_font_size(role_line, bold, max_width=313, start_size=10)
+        specialty_size = resume.fitted_font_size(specialty_line, bold, max_width=313, start_size=8.2)
+        self.assertLessEqual(resume.pdfmetrics.stringWidth(role_line, bold, role_size), 313)
+        self.assertLessEqual(resume.pdfmetrics.stringWidth(specialty_line, bold, specialty_size), 313)
 
 
 if __name__ == '__main__':
