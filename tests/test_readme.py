@@ -75,7 +75,7 @@ class ReadmeTests(unittest.TestCase):
             self.assertNotIn(forbidden,lower)
 
     def test_current_career_status_is_accessible_and_cache_busted(self):
-        self.assertIn('Currently Associate Engineer.', self.readme)
+        self.assertIn('Currently Associate Engineer · Automotive Industry.', self.readme)
         self.assertIn('Open to jobs', self.readme)
         self.assertNotIn('internships', self.readme.lower())
         for asset in ('hero.svg', 'identity-console.svg', 'identity-console-mobile.svg', 'section-channel.svg', 'section-channel-mobile.svg'):

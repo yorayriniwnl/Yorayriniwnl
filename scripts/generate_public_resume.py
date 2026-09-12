@@ -56,6 +56,20 @@ def wrapped_lines(text: str, font: str, size: float, width: float) -> list[str]:
     return lines
 
 
+def fitted_font_size(
+    text: str,
+    font: str,
+    max_width: float,
+    start_size: float,
+    min_size: float = 7.5,
+    step: float = 0.1,
+) -> float:
+    size = start_size
+    while size > min_size and pdfmetrics.stringWidth(text, font, size) > max_width:
+        size = round(size - step, 2)
+    return size
+
+
 def draw_wrapped(
     pdf: canvas.Canvas,
     text: str,
@@ -134,11 +148,12 @@ def build_resume(raw_output: Path) -> None:
     pdf.setFillColor(INK)
     pdf.setFont(bold, 28)
     pdf.drawString(margin, height - 52, profile["identity"]["name"].upper())
-    pdf.setFillColor(CRIMSON)
-    pdf.setFont(bold, 10)
-    pdf.drawString(margin, height - 70, f'{profile["identity"]["role"].upper()}  /  {profile["identity"]["specialty"].upper()}')
-
     header_right_x = 357
+    header = f'{profile["identity"]["role"].upper()}  /  {profile["identity"]["specialty"].upper()}'
+    pdf.setFillColor(CRIMSON)
+    pdf.setFont(bold, fitted_font_size(header, bold, header_right_x - margin - 10, 10))
+    pdf.drawString(margin, height - 70, header)
+
     pdf.setFillColor(MUTED)
     pdf.setFont(regular, 7.4)
     pdf.drawRightString(width - margin, height - 47, profile["identity"]["location"])
