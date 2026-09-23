@@ -79,7 +79,8 @@ class ReadmeTests(unittest.TestCase):
         self.assertIn('Open to jobs', self.readme)
         self.assertNotIn('internships', self.readme.lower())
         for asset in ('hero.svg', 'identity-console.svg', 'identity-console-mobile.svg', 'section-channel.svg', 'section-channel-mobile.svg'):
-            self.assertIn(f'/output/{asset}?rev=career-v1', self.readme)
+            revision = generate_readme.ASSET_REVISIONS[asset]
+            self.assertIn(f'/output/{asset}?rev={revision}', self.readme)
 
     def test_original_cover_cache_versions_are_preserved(self):
         for filename in generate_readme.PROJECT_VISUALS.values():
