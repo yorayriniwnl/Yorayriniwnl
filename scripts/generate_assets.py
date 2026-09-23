@@ -546,6 +546,29 @@ def gen_constellation(color):
     )
 
 
+def gen_command_orbit(w, h, color):
+    """Add a restrained six-sector instrument behind the identity lockup."""
+    cx, cy = w / 2, h / 2
+    parts = []
+    for radius, dash, opacity in ((104, "2 9", .24), (124, "1 7", .35), (146, "5 11", .3)):
+        parts.append(
+            f'<circle cx="{cx}" cy="{cy}" r="{radius}" fill="none" stroke="{color}" '
+            f'stroke-width="1" stroke-dasharray="{dash}" opacity="{opacity}"/>'
+        )
+    for index in range(6):
+        angle = -math.pi / 2 + index * math.tau / 6
+        inner = 88
+        outer = 140
+        x1, y1 = cx + math.cos(angle) * inner, cy + math.sin(angle) * inner
+        x2, y2 = cx + math.cos(angle) * outer, cy + math.sin(angle) * outer
+        x3, y3 = cx + math.cos(angle) * 146, cy + math.sin(angle) * 146
+        parts.append(f'<path d="M{x1:.1f} {y1:.1f}L{x2:.1f} {y2:.1f}" stroke="{color}" stroke-width="1" opacity=".32"/>')
+        parts.append(f'<circle cx="{x2:.1f}" cy="{y2:.1f}" r="2" fill="{color}" opacity=".8"/>')
+        parts.append(f'<path d="M{x3-3:.1f} {y3:.1f}h6m-3-3v6" stroke="{color}" opacity=".5"/>')
+    parts.append(f'<path d="M{cx-175:.1f} {cy:.1f}h350M{cx:.1f} {cy-92:.1f}v184" stroke="{color}" stroke-width=".7" opacity=".16"/>')
+    return f'<g aria-hidden="true" opacity=".76">{"".join(parts)}</g>'
+
+
 def gen_corner_brackets(color, w, h):
     L, inset = 22, 14
     corners = [
@@ -649,6 +672,7 @@ def build_hero_svg(cfg):
     constellation = gen_constellation(cfg["primary"])
     brackets = gen_corner_brackets(cfg["primary"], W, H)
     ornament = gen_divider_ornament(W / 2, 176, cfg["primary"], 280, 42)
+    command_orbit = gen_command_orbit(W, H, cfg["primary"])
 
     return f'''<svg width="{W}" height="{H}" viewBox="0 0 {W} {H}" xmlns="http://www.w3.org/2000/svg">
 <defs>
@@ -689,6 +713,7 @@ def build_hero_svg(cfg):
 {neb_uses}
 <ellipse cx="{W/2}" cy="168" rx="490" ry="132" fill="url(#textWell)"/>
 <rect width="{W}" height="{H}" fill="url(#vignette)"/>
+{command_orbit}
 {kintsugi}
 {constellation}
 {brackets}
@@ -1226,6 +1251,33 @@ def kinetic_glyph_svg(kind, x, y, scale=1.0, delay=0.0):
 </g>'''
 
 
+def gen_hero_sector_ring(cx, cy, accent):
+    """Trace six indexed project sectors around the portrait's signal field."""
+    parts = []
+    for radius, opacity, dash in ((150, .16, "2 8"), (172, .33, "1 7"), (194, .2, "8 18")):
+        parts.append(
+            f'<circle cx="{cx}" cy="{cy}" r="{radius}" fill="none" stroke="{accent}" '
+            f'stroke-width="1" stroke-dasharray="{dash}" opacity="{opacity}"/>'
+        )
+    for index in range(6):
+        angle = -math.pi / 2 + index * math.tau / 6
+        inner, outer = 146, 202
+        x1, y1 = cx + math.cos(angle) * inner, cy + math.sin(angle) * inner
+        x2, y2 = cx + math.cos(angle) * outer, cy + math.sin(angle) * outer
+        nx, ny = cx + math.cos(angle) * 172, cy + math.sin(angle) * 172
+        parts.append(f'<path d="M{x1:.1f} {y1:.1f}L{x2:.1f} {y2:.1f}" stroke="{accent}" stroke-width="1" opacity=".3"/>')
+        parts.append(f'<rect x="{nx-12:.1f}" y="{ny-10:.1f}" width="24" height="20" rx="3" fill="#050101" stroke="{accent}" stroke-opacity=".7"/>')
+        parts.append(f'<text x="{nx:.1f}" y="{ny+3.5:.1f}" class="mono" font-size="8" fill="#f5eaea" text-anchor="middle">{index+1:02d}</text>')
+    for index in range(24):
+        angle = index * math.tau / 24
+        inner = 204 if index % 2 == 0 else 207
+        outer = 213
+        x1, y1 = cx + math.cos(angle) * inner, cy + math.sin(angle) * inner
+        x2, y2 = cx + math.cos(angle) * outer, cy + math.sin(angle) * outer
+        parts.append(f'<path d="M{x1:.1f} {y1:.1f}L{x2:.1f} {y2:.1f}" stroke="{accent}" stroke-width="1" opacity=".42"/>')
+    return f'<g aria-hidden="true" opacity=".82">{"".join(parts)}</g>'
+
+
 def build_cinematic_hero_svg(cfg):
     """A self-contained title sequence: original raster key art plus a
     GitHub-safe animated HUD, scan pass, signal traces, and identity lockup."""
@@ -1262,6 +1314,7 @@ def build_cinematic_hero_svg(cfg):
             f'<animate attributeName="stroke-dashoffset" values="0;-68" '
             f'dur="{4.0+i*1.4:.1f}s" repeatCount="indefinite"/></path>'
         )
+    sector_ring = gen_hero_sector_ring(1120, 220, "#e84b4b")
 
     chips = [
         (74, "PRODUCT", "REACT + NEXT"),
@@ -1340,6 +1393,7 @@ def build_cinematic_hero_svg(cfg):
 <animateTransform attributeName="transform" type="rotate" from="360 1120 220"
  to="0 1120 220" dur="28s" repeatCount="indefinite"/>
 </ellipse>
+{sector_ring}
 {"".join(embers)}
 </g>
 <rect x="10" y="10" width="1480" height="600" rx="8" fill="none" stroke="#3b0b0b"/>

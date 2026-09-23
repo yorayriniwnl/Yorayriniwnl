@@ -23,7 +23,7 @@ PROJECT_SUMMARIES = {p: f'project-summary-{p}.svg' for p in ORDER}
 RESPONSIVE_ASSETS = {
     "identity-console.svg", "signal-strip.svg", "field-notes.svg", "skills-matrix.svg",
     "arsenal.svg", "finale.svg", "operator-gateway.svg", "achievement-rack.svg",
-    "protocol-engineer.svg", "protocol-product.svg", "protocol-human.svg",
+    "protocol-engineer.svg", "protocol-product.svg", "protocol-human.svg", "systems-atlas.svg",
     "stats.svg", "contribution-stream.svg",
     "dossier-toggle.svg",
     *[f'section-{s}.svg' for s in ("projects", "field", "arsenal", "record", "operator", "channel")],
@@ -31,8 +31,9 @@ RESPONSIVE_ASSETS = {
 }
 MOTION_ASSETS = ("systems-reel-v8.gif", "systems-reel-mobile-v8.gif", "systems-reel-v8-still.png", "systems-reel-mobile-v8-still.png")
 ASSET_REVISIONS = {
-    "hero.svg": "career-v1",
-    **{f'{name}{suffix}.svg': "career-v1" for name in ("identity-console", "section-channel", "finale") for suffix in ("", "-mobile")},
+    "hero.svg": "command-v1",
+    "systems-atlas.svg": "command-v1", "systems-atlas-mobile.svg": "command-v1",
+    **{f'{name}{suffix}.svg': "command-v1" for name in ("identity-console", "signal-strip", "section-channel", "finale") for suffix in ("", "-mobile")},
     "project-portfolio-v2.svg": "raster-v8", "project-portfolio-mobile-v2.svg": "raster-v8",
     "project-helios.svg": "raster-v15", "project-zenith.svg": "raster-v14",
     "project-vision.svg": "raster-v16", "project-talks.svg": "raster-v14", "project-token-usage.svg": "raster-v15",
@@ -120,6 +121,7 @@ def render_readme(profile=None):
             lines.append('<br/>')
     lines += ['</p>', '', '</div>', '', '<a id="selected-systems"></a>', '',
               image("section-projects.svg", "Section 01: six selected projects", handle), '',
+              image("systems-atlas.svg", "Cinematic six-sector systems atlas. " + "; ".join(f'{project["name"]}: {project["status"]}' for project in p["projects"]), handle), '',
               *buttons([(f'#project-{pid}',f'project-index-{pid}.svg',f'Jump to {SHORT[pid]}') for pid in ORDER],handle)]
     projects={project["id"]:project for project in p["projects"]}
     for pid in ORDER:
