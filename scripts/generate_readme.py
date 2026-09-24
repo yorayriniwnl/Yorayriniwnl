@@ -11,159 +11,202 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 from profile_data import load_profile
-from redline import ORDER, REVISION, SHORT
+from redline import ORDER
 
 ROOT = SCRIPT_DIR.parent
 README_PATH = ROOT / "README.md"
 PROFILE_REPOSITORY = "Yorayriniwnl"
 SELECTED_PROJECT_IDS = ORDER
-PROJECT_VISUALS = {p: f'project-{p}.svg' for p in ORDER}
+PROJECT_VISUALS = {p: f"project-{p}.svg" for p in ORDER}
 PROJECT_VISUALS["portfolio"] = "project-portfolio-v2.svg"
-PROJECT_SUMMARIES = {p: f'project-summary-{p}.svg' for p in ORDER}
-RESPONSIVE_ASSETS = {
-    "identity-console.svg", "signal-strip.svg", "field-notes.svg", "skills-matrix.svg",
-    "arsenal.svg", "finale.svg", "operator-gateway.svg", "achievement-rack.svg",
-    "protocol-engineer.svg", "protocol-product.svg", "protocol-human.svg", "systems-atlas.svg",
-    "stats.svg", "contribution-stream.svg",
-    "dossier-toggle.svg",
-    *[f'section-{s}.svg' for s in ("projects", "field", "arsenal", "record", "operator", "channel")],
-    *PROJECT_SUMMARIES.values(), *[f'project-dossier-{p}.svg' for p in ORDER],
-}
-MOTION_ASSETS = ("systems-reel-v8.gif", "systems-reel-mobile-v8.gif", "systems-reel-v8-still.png", "systems-reel-mobile-v8-still.png")
+MOTION_ASSETS = (
+    "systems-reel-v9.gif",
+    "systems-reel-mobile-v9.gif",
+    "systems-reel-v9-still.png",
+    "systems-reel-mobile-v9-still.png",
+)
 ASSET_REVISIONS = {
-    "hero.svg": "command-v1",
-    "systems-atlas.svg": "command-v1", "systems-atlas-mobile.svg": "command-v1",
-    **{f'{name}{suffix}.svg': "command-v1" for name in ("identity-console", "signal-strip", "section-channel", "finale") for suffix in ("", "-mobile")},
-    "project-portfolio-v2.svg": "raster-v8", "project-portfolio-mobile-v2.svg": "raster-v8",
-    "project-helios.svg": "raster-v15", "project-zenith.svg": "raster-v14",
-    "project-vision.svg": "raster-v16", "project-talks.svg": "raster-v14", "project-token-usage.svg": "raster-v15",
-    **{name: "motion-v8" for name in MOTION_ASSETS},
+    "hero.svg": "command-v2",
+    "project-portfolio-v2.svg": "raster-v8",
+    "project-portfolio-mobile-v2.svg": "raster-v8",
+    "project-helios.svg": "raster-v15",
+    "project-zenith.svg": "raster-v14",
+    "project-vision.svg": "raster-v16",
+    "project-talks.svg": "raster-v14",
+    "project-token-usage.svg": "raster-v15",
+    **{name: "motion-v9" for name in MOTION_ASSETS},
 }
-# Compact control geometry changed after checking GitHub's narrower mobile column.
-CONTROL_REVISION = "redline-v2"
 
 
 def raw_asset_url(handle, filename):
-    revision = ASSET_REVISIONS.get(filename, CONTROL_REVISION if filename.startswith(("jump-", "nav-", "project-index-")) else REVISION)
-    return f'https://raw.githubusercontent.com/{handle}/{PROFILE_REPOSITORY}/output/{filename}?rev={revision}'
+    revision = ASSET_REVISIONS.get(filename, "spectrum-v1")
+    return f"https://raw.githubusercontent.com/{handle}/{PROFILE_REPOSITORY}/output/{filename}?rev={revision}"
 
 
 def profile_views_url(handle):
-    return f'https://komarev.com/ghpvc/?username={handle}&amp;label=TOTAL+PROFILE+VIEWS&amp;color=ff1f2d&amp;style=for-the-badge&amp;abbreviated=false'
+    return f"https://komarev.com/ghpvc/?username={handle}&amp;label=TOTAL+PROFILE+VIEWS&amp;color=ff1f2d&amp;style=for-the-badge&amp;abbreviated=false"
 
 
 def image(filename, alt, handle, width="100%"):
     tag = f'<img src="{raw_asset_url(handle, filename)}" width="{width}" alt="{html.escape(alt, quote=True)}"/>'
-    mobile = filename.replace(".svg", "-mobile.svg")
     if filename == "project-portfolio-v2.svg":
         mobile = "project-portfolio-mobile-v2.svg"
-    if filename in RESPONSIVE_ASSETS or filename == "project-portfolio-v2.svg":
         return f'<picture><source media="(max-width: 600px)" srcset="{raw_asset_url(handle, mobile)}"/>{tag}</picture>'
     return tag
 
 
 def linked_image(href, filename, alt, handle, width="100%"):
-    return [f'<a href="{html.escape(href, quote=True)}">{image(filename, alt, handle, width)}</a>']
+    return f'<a href="{html.escape(href, quote=True)}">{image(filename, alt, handle, width)}</a>'
 
 
-def linked_button(href, filename, alt, handle):
-    # GitHub prefixes authored IDs during sanitization; target the rendered ID.
-    if href.startswith('#') and not href.startswith('#user-content-'):
-        href = '#user-content-' + href[1:]
-    return linked_image(href, filename, alt, handle, "145")[0]
-
-
-def buttons(items, handle):
-    return ['<p align="center">', *[linked_button(url, asset, alt, handle) for url, asset, alt in items], '</p>', '']
+def markdown_link(label, href):
+    return f"[{label}]({href})"
 
 
 def systems_reel(handle):
     variants = (
-        ("(max-width: 600px) and (prefers-reduced-motion: reduce)", "systems-reel-mobile-v8-still.png"),
-        ("(prefers-reduced-motion: reduce)", "systems-reel-v8-still.png"),
-        ("(max-width: 600px)", "systems-reel-mobile-v8.gif"),
+        ("(max-width: 600px) and (prefers-reduced-motion: reduce)", "systems-reel-mobile-v9-still.png"),
+        ("(prefers-reduced-motion: reduce)", "systems-reel-v9-still.png"),
+        ("(max-width: 600px)", "systems-reel-mobile-v9.gif"),
     )
-    return ["<picture>", *[f'<source media="{media}" srcset="{raw_asset_url(handle, asset)}"/>' for media, asset in variants],
-            image("systems-reel-v8.gif", "Six project domains in motion. Illustrative animation, not live telemetry.", handle), "</picture>"]
+    sources = [f'<source media="{media}" srcset="{raw_asset_url(handle, asset)}"/>' for media, asset in variants]
+    return ["<picture>", *sources,
+            image("systems-reel-v9.gif", "Six project worlds in motion: product design, energy telemetry, solar planning, image forensics, realtime communication, and local AI usage. Illustrative artwork, not live telemetry.", handle),
+            "</picture>"]
 
 
-def project_block(project, handle):
+def project_block(project, handle, index):
     pid = project["id"]
     target = project.get("live") or project["repo"]
-    detail = f'{project["name"]}: {project["status"]}. {project["summary"]} Proof: {"; ".join(project["proof"])}. Stack: {"; ".join(project["stack"])}.'
-    dossier_alt = f'Expand {project["name"]} project details'
-    links = [(project["repo"], "nav-source.svg", f'Inspect {project["name"]} source repository')]
+    proof = "\n".join(f"- {fact}" for fact in project["proof"])
+    links = [markdown_link("Source", project["repo"])]
     if project.get("live"):
-        links.insert(0, (project["live"], "nav-live.svg", f'Open {project["name"]} project'))
-    return [f'<a id="project-{pid}"></a>', '',
-            *linked_image(target, PROJECT_VISUALS[pid], f'{project["name"]}: {project["codename"].lower()}. Illustrative artwork.', handle), '',
-            image(PROJECT_SUMMARIES[pid], detail, handle), '', '<details>',
-            f'<summary>{image("dossier-toggle.svg", dossier_alt, handle, "95%")}</summary>', '',
-            image(f'project-dossier-{pid}.svg', detail, handle), '', *buttons(links, handle), '</details>', '']
+        links.insert(0, markdown_link("Live demo", project["live"]))
+    return [
+        f'<a id="project-{pid}"></a>',
+        f'### {index:02d} / {project["name"]}',
+        f'`{project["status"]}` · {project["period"]}',
+        "",
+        project["summary"],
+        "",
+        linked_image(target, PROJECT_VISUALS[pid], f'Cinematic artwork for {project["name"]}.', handle),
+        "",
+        f'**Stack:** {" · ".join(project["stack"])}',
+        f'**Explore:** {" · ".join(links)}',
+        "",
+        "<details>",
+        f'<summary>Build notes and proof ({len(project["proof"])} items)</summary>',
+        "",
+        proof,
+        "",
+        "</details>",
+        "",
+    ]
 
 
 def render_readme(profile=None):
     p = profile or load_profile()
-    contact, handle = p["contact"], p["identity"]["handle"]
-    resume = f'https://github.com/{handle}/{PROFILE_REPOSITORY}/blob/main/output/pdf/Ayush_Roy_Resume_Public.pdf'
-    lines = ['<!-- Generated by scripts/generate_readme.py from data/profile.json. -->', '', '<div align="center">', '',
-             *linked_image(contact["portfolio"], "hero.svg", f'{p["identity"]["name"]}, {p["identity"]["role"]} and {p["identity"]["specialty"]}', handle), '',
-             *buttons([(f'#{anchor}', f'jump-{slug}.svg', f'Jump to {label}') for anchor,slug,label in (
-                 ("selected-systems","projects","selected projects"), ("field-notes","experience","experience and education"),
-                 ("public-record","activity","GitHub activity and profile views"), ("open-channel","contact","contact and collaboration"))], handle),
-             image("identity-console.svg", f'Currently {p["identity"]["role"]}. {p["identity"]["positioning"]} {p["availability"]["status"]}. {p["identity"]["location"]}.', handle), '',
-             *buttons([(contact["portfolio"],"nav-portfolio.svg","Open Ayush Roy portfolio"),(resume,"nav-resume.svg","View Ayush Roy public resume"),
-                       (contact["linkedin"],"nav-linkedin.svg","Connect on LinkedIn"),(f'mailto:{contact["email"]}',"nav-email.svg","Email Ayush Roy")],handle),
-             image("signal-strip.svg","Product, realtime systems, computer vision, and 3D interfaces",handle), '', '<p>']
-    for i,item in enumerate(p["proof"]):
-        lines.append(image(f'proof-{item["id"]}.svg', f'{item["value"]} {item["label"]}. {item["detail"]}', handle, "350"))
-        if i == 1:
-            lines.append('<br/>')
-    lines += ['</p>', '', '</div>', '', '<a id="selected-systems"></a>', '',
-              image("section-projects.svg", "Section 01: six selected projects", handle), '',
-              image("systems-atlas.svg", "Cinematic six-sector systems atlas. " + "; ".join(f'{project["name"]}: {project["status"]}' for project in p["projects"]), handle), '',
-              *buttons([(f'#project-{pid}',f'project-index-{pid}.svg',f'Jump to {SHORT[pid]}') for pid in ORDER],handle)]
-    projects={project["id"]:project for project in p["projects"]}
-    for pid in ORDER:
-        lines += project_block(projects[pid],handle)
-    exp,edu=p["experience"][0],p["education"][0]
-    lines += ['<a id="field-notes"></a>', '', image("section-field.svg","Section 02: experience and education",handle),'',
-              image("field-notes.svg",f'{exp["role"]} at {exp["organization"]}, {exp["period"]}. {exp["summary"]} {edu["degree"]} at {edu["institution"]}, {edu["period"]}. Coursework: {"; ".join(edu["coursework"])}.',handle),'',
-              *buttons([(resume,"nav-resume.svg","View the public resume")],handle),
-              image("section-arsenal.svg","Section 03: technical range",handle),'',image("arsenal.svg","Across the stack, from interface to infrastructure",handle),'',
-              image("skills-matrix.svg", "; ".join(f'{key}: {", ".join(values)}' for key,values in p["skills"].items()),handle),'',
-              '<a id="public-record"></a>','',image("section-record.svg","Section 04: public GitHub activity",handle),'',
-              '<p align="center">',f'<img src="{profile_views_url(handle)}" width="350" alt="Total profile views, as counted by Komarev"/>','</p>','',
-              *linked_image(contact["github"],"stats.svg","GitHub repositories, stars, followers, and languages. Timestamped public snapshot.",handle),'',
-              *linked_image(contact["github"],"contribution-stream.svg","365 days of GitHub contributions, with date range and activity totals",handle),'',
-              image("section-operator.svg","Section 05: the process and the person",handle),'','<details>',
-              '<summary>'+image("operator-gateway.svg","Expand the field manual: process, principles, and off the clock",handle,"95%")+'</summary>','',
-              *systems_reel(handle),'',image("achievement-rack.svg","Achievements beyond the code",handle),'',
-              image("protocol-engineer.svg","Engineering process",handle),'',image("protocol-product.svg","Product principles",handle),'',
-              *linked_image(contact["steam"],"protocol-human.svg","Off the clock: visit Ayush Roy on Steam",handle),'','</details>','',
-              '<a id="open-channel"></a>','',image("section-channel.svg","Section 06: jobs and collaboration",handle),'',
-              *linked_image(f'mailto:{contact["email"]}',"finale.svg","Start a conversation with Ayush Roy",handle),'',
-              *buttons([(f'mailto:{contact["email"]}',"nav-email.svg","Email Ayush Roy"),(contact["linkedin"],"nav-linkedin.svg","Connect on LinkedIn"),
-                        (contact["portfolio"],"nav-portfolio.svg","Open the portfolio"),(contact["github"],"nav-github.svg","Follow on GitHub"),
-                        (contact["devpost"],"nav-devpost.svg","Explore Devpost prototypes"),(contact["steam"],"nav-steam.svg","Open Steam profile")],handle)]
-    return '\n'.join(lines)
+    contact = p["contact"]
+    identity = p["identity"]
+    handle = identity["handle"]
+    resume = f"https://github.com/{handle}/{PROFILE_REPOSITORY}/blob/main/output/pdf/Ayush_Roy_Resume_Public.pdf"
+    projects = {project["id"]: project for project in p["projects"]}
+    project_links = [markdown_link(f"{index:02d} {projects[pid]['name']}", f"#user-content-project-{pid}")
+                     for index, pid in enumerate(ORDER, start=1)]
+
+    lines = [
+        "<!-- Generated by scripts/generate_readme.py from data/profile.json. -->",
+        "",
+        '<div align="center">',
+        linked_image(contact["portfolio"], "hero.svg", "Cinematic crimson portrait artwork with a six-world command interface.", handle),
+        "</div>",
+        "",
+        f"# {identity['name']}",
+        f"**{identity['role']}** · **{identity['specialty']}**",
+        "",
+        identity["positioning"],
+        "",
+        f"**{p['availability']['status']}** · {identity['location']} · {identity['timezone']}",
+        "",
+        " · ".join((markdown_link("Portfolio", contact["portfolio"]), markdown_link("Résumé", resume),
+                    markdown_link("LinkedIn", contact["linkedin"]), markdown_link("GitHub", contact["github"]),
+                    markdown_link("Email", f'mailto:{contact["email"]}'))),
+        "",
+        "## Six worlds / one builder",
+        "",
+        "Each build gets its own signal color, product language, and operating model. This reel is an illustrative motion study.",
+        "",
+        '<div align="center">',
+        *systems_reel(handle),
+        "</div>",
+        "",
+        "## Selected systems",
+        "",
+        " · ".join(project_links),
+        "",
+    ]
+    for index, pid in enumerate(ORDER, start=1):
+        lines.extend(project_block(projects[pid], handle, index))
+
+    experience = p["experience"][0]
+    education = p["education"][0]
+    email_link = markdown_link(contact["email"], f"mailto:{contact['email']}")
+    lines.extend([
+        "## Field notes",
+        "",
+        f'**{experience["role"]} · {experience["organization"]}** — {experience["period"]}, {experience["location"]}. {experience["summary"]}',
+        "",
+        f'**{education["degree"]} · {education["institution"]}** — {education["period"]}, {education["location"]}.',
+        "",
+        f'**Focus:** {" · ".join(education["coursework"])}',
+        "",
+        f'**Current range:** {" · ".join(p["skills"]["product"])} · {" · ".join(p["skills"]["backend"])} · {" · ".join(p["skills"]["ml"])} · {" · ".join(p["skills"]["platform"])}',
+        "",
+        "<details>",
+        "<summary>Credentials and off-screen chapters</summary>",
+        "",
+        "**Credentials**",
+        *[f'- {item["name"]} — {item["issuer"]}, {item["date"]}' for item in p["certifications"]],
+        "",
+        "**Other chapters**",
+        *[f"- {item}" for item in p["achievements"]],
+        f'- Off the clock: {markdown_link("Steam profile", contact["steam"])}',
+        "",
+        "</details>",
+        "",
+        "## Public signal",
+        "",
+        '<p align="center">',
+        f'<img src="{profile_views_url(handle)}" width="350" alt="Total profile views, as counted by Komarev"/>',
+        "</p>",
+        "",
+        linked_image(contact["github"], "stats.svg", "Timestamped public GitHub snapshot: repositories, stars, followers, and languages.", handle),
+        "",
+        linked_image(contact["github"], "contribution-stream.svg", "GitHub contribution activity for the labeled 365-day date range.", handle),
+        "",
+        "## Open channel",
+        "",
+        f'For roles, product builds, and thoughtful collaborations: {email_link} · {markdown_link("LinkedIn", contact["linkedin"])} · {markdown_link("Devpost", contact["devpost"])}.',
+        "",
+    ])
+    return "\n".join(lines)
 
 
 def main():
-    parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--check',action='store_true')
-    args=parser.parse_args()
-    rendered=render_readme()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--check", action="store_true")
+    args = parser.parse_args()
+    rendered = render_readme()
     if args.check:
-        if not README_PATH.is_file() or README_PATH.read_text(encoding='utf-8') != rendered:
-            print('README.md is out of date; run scripts/generate_readme.py',file=sys.stderr)
+        if not README_PATH.is_file() or README_PATH.read_text(encoding="utf-8") != rendered:
+            print("README.md is out of date; run scripts/generate_readme.py", file=sys.stderr)
             return 1
-        print('README.md matches canonical profile data')
+        print("README.md matches canonical profile data")
         return 0
-    README_PATH.write_text(rendered,encoding='utf-8')
-    print(f'wrote {README_PATH} ({len(rendered):,} characters)')
+    README_PATH.write_text(rendered, encoding="utf-8")
+    print(f"wrote {README_PATH} ({len(rendered):,} characters)")
     return 0
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     raise SystemExit(main())

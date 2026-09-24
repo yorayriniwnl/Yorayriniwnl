@@ -1,35 +1,28 @@
-# Crimson profile remaster
+# Spectrum command deck
 
-The public composition is rendered by `scripts/redline.py`, with links and native disclosures in `scripts/generate_readme.py`. Canonical facts and artwork ownership stay in `data/profile.json`.
+The profile is generated from `data/profile.json` by `scripts/generate_readme.py`. `scripts/generate_assets.py` owns the SVG surfaces, `scripts/generate_motion.py` owns the six-world motion reel, and `design/yor-tokens.json` is the visual source of truth.
 
-## Art direction
+## Audit findings behind this pass
 
-Black and saturated crimson, editorial serif headings, restrained interface glyphs, larger body text, and a slim moving edge. The six project covers and approved portrait remain byte-identical to their previous generated versions. New mobile layouts compose text at a 360px natural width instead of shrinking desktop text.
+- The live README used images for nearly all copy. The rendered article had no selectable body text, including project summaries and contact navigation.
+- The opening repeated its identity panel, social buttons, proof cards, signal strip, atlas, and project selectors before the first project.
+- Most of the 82 referenced visual assets shared the same crimson interface treatment, so the six project worlds did not read as distinct systems.
+- GitHub's rendered content column measured about 846 px at desktop width, 308 px in a 390 px viewport, and 238 px in a 320 px viewport. Several 360 px graphics therefore had to shrink sharply on narrow screens.
+- The previous local preview used a 742 px wrapper and did not match the live article width.
+- The public account sidebar still showed an older availability and location than the canonical README data. Those account settings are outside this repository.
 
-Project summaries introduce the idea. Their native disclosures contain the full evidence, stack, and source links. Six visual selectors jump directly to the projects. The existing six-world motion reel is inside the field manual, with mobile and reduced-motion posters.
+## Current composition
 
-GitHub sanitizes authored anchor IDs with a `user-content-` prefix. Shortcut URLs target that rendered ID; browser checks verify the destination's viewport position, not just the URL hash. Compact 145px controls fit two columns in GitHub's mobile README content area.
+The opening pairs the existing cinematic portrait with plain-text role, positioning, availability, and contact links. A desktop/mobile motion reel follows immediately and has still-image sources for reduced-motion preferences. Six numbered project entries use the original cover artwork, readable summaries, visible stacks and links, and native proof disclosures. Field notes, public activity, and a compact credentials disclosure close the page.
 
-## Artwork provenance
-
-Mode: built-in image-generation tool; new generation, not a portrait edit.
-
-Selected source: `assets/crimson-studio-v1.png`.
-Delivery: `assets/crimson-studio-v1-optimized.jpg` (1200 × 675, JPEG).
-Use: the desktop and mobile identity panels. This is illustrative studio artwork, not a photograph of the owner's actual equipment.
-
-Final prompt:
-
-> undefined
+The global crimson frame stays intact. Portfolio, Helios, Zenith, Vision, Talks, and Token Usage now have separate color signatures in the shared project tokens and the motion reel. The Token Usage project points to its own world token rather than borrowing Talks' palette.
 
 ## Verification and publication
 
-Run `python scripts/profile_data.py`, `python scripts/generate_assets.py`, `python scripts/generate_readme.py --check`, and `python -m unittest discover -s tests -v`. `scripts/optimize_assets.py` produces deterministic image derivatives and checks the approved portrait hash.
+The normal checks are `python scripts/profile_data.py`, `python scripts/generate_assets.py`, `python scripts/generate_readme.py --check`, `python scripts/generate_motion.py`, and `python -m unittest discover -s tests -v`. Run `scripts/optimize_assets.py` to regenerate image derivatives; it also checks the approved portrait hash.
 
-Browser QA covered 1280px, 390px, and 320px widths: no horizontal overflow, missing images, or out-of-bounds text; all seven disclosures open; project selectors resolve; reduced-motion visitors receive still posters. Local preview evidence lives in ignored `tmp/redline-audit.json` and `tmp/redline-*.png`.
+The GitHub Actions workflow publishes generated SVGs and the `systems-reel*.gif` / `systems-reel*.png` files to the `output` branch. Verify both the source commit and the rendered GitHub profile after publishing. Do not infer live telemetry from the illustrative motion reel; public stats and contribution cards are separately timestamped snapshots.
 
-Public stats show their successful fetch time. The contribution card names its exact date range; both mobile and desktop retain every daily count. Language shares use all fetched code bytes in the denominator and do not imply skill proficiency. Incomplete language fetches stop publication.
+## Artwork provenance
 
-Publish source to main and the generated SVGs to a detached worktree based on origin/output. Preserve the existing motion files and the public resume. Independently verify both remote SHAs and the actual GitHub README render.
-
-At this remaster, GitHub Actions reported an account billing lock. Assets and fresh public snapshots are published directly; scheduled refreshes require that GitHub account issue to be resolved.
+The existing hero and six project covers remain the supplied artwork. Their source and optimized delivery files are recorded in `data/profile.json`. The six-world reel is generated from code and shared design tokens, with no external media or fonts.
