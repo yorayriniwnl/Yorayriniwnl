@@ -1,16 +1,5 @@
 # What moved, and why
 
-## Pass 26: six-sector command atlas
-
-The profile now opens as a cinematic command deck: the identity hero gains a
-six-sector signal ring, the operator panel becomes a control surface, and a
-data-driven atlas maps all six selected projects before their existing jump
-controls and dossiers. Project summaries carry sector indexes and clearer
-status readouts, while the closing contact panel reads as an open channel.
-Mobile receives a vertically composed atlas; the project facts, source links,
-native disclosures, and reduced-motion behavior remain part of the README
-flow. The bundled full-page preview is refreshed from the rendered profile.
-
 ## Pass 25: readable cinematic atlas v8
 
 The top systems reel now uses a 3×2 desktop composition instead of compressing

@@ -8,7 +8,6 @@ from __future__ import annotations
 
 import base64
 import html
-import math
 import textwrap
 from functools import lru_cache
 from pathlib import Path
@@ -16,12 +15,10 @@ from pathlib import Path
 from profile_data import load_design_tokens
 
 ROOT = Path(__file__).resolve().parents[1]
-DESIGN_TOKENS = load_design_tokens()
-COLORS = DESIGN_TOKENS["color"]
-WORLD_TOKENS = DESIGN_TOKENS["worlds"]
+COLORS = load_design_tokens()["color"]
 RED, PAPER, MUTED = (COLORS[k] for k in ("crimson", "paper", "muted"))
 LINE, BG = "#3b121b", "#080406"
-REVISION = "command-v1"
+REVISION = "redline-v1"
 ORDER = ("portfolio", "vision", "zenith", "helios", "token-usage", "talks")
 SHORT = {"portfolio": "PORTFOLIO", "vision": "AI VS. REAL", "zenith": "ZENITH",
          "helios": "HELIOS", "token-usage": "TOKEN USAGE", "talks": "TALKS V2"}
@@ -138,80 +135,36 @@ def button(label, subtitle, kind, width=180):
 
 def section(index, title, subtitle, mobile=False):
     w = 360 if mobile else 720
-    b = text(f"SYS / {index} / 06", 20, 35, 11 if mobile else 12, RED, "mono")
-    b += text(subtitle, 113 if mobile else 128, 34, 9.5 if mobile else 11, MUTED, "mono")
+    b = text(index, 20, 35, 16, RED, "mono") + text(subtitle, 58, 34, 10 if mobile else 12, MUTED, "mono")
     b += text(title, 20, 81, 34 if mobile else 43, PAPER, "serif")
     if not mobile:
-        b += f'<path d="M610 82h56m10-26 18 18m-6-18 18 18m-6-18 18 18" stroke="{RED}" stroke-width="2"/>'
-        b += f'<circle cx="620" cy="30" r="3" fill="{RED}" class="beacon"/>'
+        b += f'<path d="m656 56 18 18m-6-18 18 18m-6-18 18 18" stroke="{RED}" stroke-width="2"/>'
     return page(title, w, 108, b)
 
 
 def identity(profile, mobile=False):
-    w, h = (360, 462) if mobile else (720, 318)
+    w, h = (360, 434) if mobile else (720, 302)
     art = raster(profile["visual_contract"]["delivery"]["supporting_art"]["identity"])
-    if mobile:
-        b = f'<image href="{art}" x="0" y="0" width="{w}" height="188" preserveAspectRatio="xMidYMid slice"/>'
-        b += f'<rect x="0" y="0" width="{w}" height="188" fill="{BG}" opacity=".42"/>'
-        b += '<path d="M0 176H360" stroke="url(#rim)" stroke-width="2"/>'
-        cx, cy = 302, 76
-        b += f'<circle cx="{cx}" cy="{cy}" r="55" fill="none" stroke="{RED}" opacity=".38" stroke-dasharray="2 7"/>'
-        b += f'<circle cx="{cx}" cy="{cy}" r="39" fill="none" stroke="{RED}" opacity=".52"/>'
-        b += f'<circle cx="{cx}" cy="{cy}" r="18" fill="{LINE}" stroke="{RED}"/>'
-        b += f'<circle cx="{cx}" cy="{cy}" r="4" fill="{PAPER}" class="beacon"/>'
-        b += text("YOR / ENTRY 00", 22, 214, 11, RED, "mono")
-        b += text("Interfaces with intent.", 22, 255, 31, PAPER, "serif")
-        b += text("Systems with depth.", 22, 292, 31, PAPER, "serif")
-        b += text("CURRENT / " + profile["identity"]["role"].upper(), 22, 319, 9.2, RED, "mono")
-        body, _ = lines("Full-stack products, realtime systems, and applied ML.", 22, 352, 316, 15)
-        b += body
-    else:
-        b = f'<image href="{art}" x="0" y="0" width="{w}" height="{h}" preserveAspectRatio="xMidYMid slice"/>'
-        b += f'<rect width="{w}" height="{h}" fill="{BG}" opacity=".66"/><rect width="{w}" height="{h}" fill="url(#shade)"/>'
-        b += '<path d="M0 0H720M0 8H720" stroke="url(#rim)" opacity=".75"/>'
-        b += text("YOR / OPERATOR PROFILE / ENTRY 00", 24, 35, 11, RED, "mono")
-        b += text("Interfaces with intent.", 24, 91, 42, PAPER, "serif")
-        b += text("Systems with depth.", 24, 133, 42, PAPER, "serif")
-        b += text("CURRENT / " + profile["identity"]["role"].upper(), 25, 164, 10.5, RED, "mono")
-        body, _ = lines("Full-stack products, realtime systems, and applied ML.", 25, 197, 414, 16)
-        b += body
-        cx, cy = 586, 145
-        b += f'<circle cx="{cx}" cy="{cy}" r="96" fill="none" stroke="{LINE}" stroke-width="1"/>'
-        b += f'<circle cx="{cx}" cy="{cy}" r="78" fill="none" stroke="{RED}" opacity=".55" stroke-dasharray="3 7"/>'
-        b += f'<circle cx="{cx}" cy="{cy}" r="57" fill="none" stroke="{RED}" opacity=".42"/>'
-        for i in range(6):
-            angle = (-90 + i * 60) * 3.141592653589793 / 180
-            nx, ny = cx + 78 * math.cos(angle), cy + 78 * math.sin(angle)
-            b += f'<path d="M{cx} {cy}L{nx:.1f} {ny:.1f}" stroke="{LINE}"/>'
-            b += f'<circle cx="{nx:.1f}" cy="{ny:.1f}" r="4" fill="{RED}" class="beacon"/>'
-        b += f'<circle cx="{cx}" cy="{cy}" r="26" fill="{BG}" stroke="{RED}" stroke-width="1.5"/>'
-        b += text("YOR", cx, cy+6, 16, PAPER, "mono", text_anchor="middle")
-        b += text("06 / SELECTED SYSTEMS", cx, cy+111, 8.7, MUTED, "mono", text_anchor="middle")
-    b += rule(22, h-46, w-44)
-    b += text("INDIA / REMOTE", 22, h-23, 10.5, MUTED, "mono")
-    b += text(profile["availability"]["status"].upper(), w-22, h-23, 10, PAPER, "mono", text_anchor="end")
+    photo = f'<image href="{art}" x="{0 if mobile else 270}" y="0" width="{w if mobile else 450}" height="{170 if mobile else h}" preserveAspectRatio="xMidYMid slice"/>'
+    b = photo + ('' if mobile else f'<rect width="720" height="{h}" fill="url(#shade)"/>')
+    y = 196 if mobile else 33
+    b += text("YOR / AYUSH ROY", 24, y, 12, RED, "mono")
+    b += text("Interfaces with intent.", 24, y+40, 31 if mobile else 39, PAPER, "serif")
+    b += text("Systems with depth.", 24, y+77, 31 if mobile else 39, PAPER, "serif")
+    b += text("CURRENT / " + profile["identity"]["role"].upper(), 24, y+107, 11, RED, "mono")
+    body, _ = lines("Full-stack products, realtime systems, and applied ML.", 24, y+134, 310 if mobile else 350, 16)
+    b += body + rule(24, h-52, w-48)
+    b += text("INDIA / REMOTE", 24, h-29, 11, MUTED, "mono")
+    b += text(profile["availability"]["status"].upper(), w-24, h-29, 10.5, PAPER, "mono", text_anchor="end")
     return page(f'Ayush Roy — {profile["identity"]["role"]} and applied ML builder', w, h, b,
                 profile["identity"]["positioning"] + " " + profile["availability"]["status"] + ". Illustrative developer studio.")
 
 
 def signal(mobile=False):
-    labels = (("PRODUCT", "product"), ("REALTIME", "realtime"), ("COMPUTER VISION", "vision"),
-              ("3D / WEB", "gpu"), ("APPLIED ML", "ml"), ("PHYSICAL SYSTEMS", "telecom"))
-    w = 360 if mobile else 720
-    cols, cell_h, gap_x = (2, 42, 8) if mobile else (3, 36, 8)
-    margin = 18
-    cell_w = (w - margin * 2 - gap_x * (cols - 1)) / cols
-    b = ''
-    for i, (label, kind) in enumerate(labels):
-        col, row = i % cols, i // cols
-        x, y = margin + col * (cell_w + gap_x), 8 + row * (cell_h + 7)
-        b += f'<path d="M{x} {y+8}v{cell_h-16}m0-8h5m{cell_w-5} 0h-5" stroke="{LINE}"/>'
-        b += glyph(kind, x+10, y+8, 19 if mobile else 18)
-        b += text(label, x+39, y+25, 10.2 if mobile else 10.5, PAPER, "mono")
-        b += f'<circle cx="{x+cell_w-9}" cy="{y+cell_h/2}" r="2" fill="{RED}" class="beacon"/>'
-    row_count = (len(labels) + cols - 1) // cols
-    height = 8 + row_count * (cell_h + 7) - 7 + 8
-    return page("Product, realtime systems, computer vision, 3D, applied ML and physical systems", w, height, b)
+    labels = ("PRODUCT", "REALTIME", "VISION", "3D / WEB")
+    b = ''.join(glyph(k, 20+(i%2 if mobile else i)*180, 17+(i//2*46 if mobile else 0), 20) + text(label, 50+(i%2 if mobile else i)*180, 32+(i//2*46 if mobile else 0), 12, PAPER, "mono")
+                for i, (label, k) in enumerate(zip(labels, ("product", "realtime", "vision", "gpu"))))
+    return page("Product, realtime systems, computer vision and 3D", 360 if mobile else 720, 100 if mobile else 54, b)
 
 
 def proof_card(item):
@@ -223,112 +176,23 @@ def proof_card(item):
 
 def summary(project, mobile=False):
     w, margin = (360 if mobile else 720), 22
-    main_width = w-44 if mobile else 520
+    b = text(f'{project["order"]:02d} / {project["status"].upper()}', margin, 29, 11, RED, "mono")
     kind={"portfolio":"product","vision":"target","zenith":"target","helios":"realtime","token-usage":"layers","talks":"network"}[project["id"]]
-    accent = WORLD_TOKENS[project["id"]]["accent"]
-    b = f'<path d="M0 0h{w}M0 5h{w}" stroke="{accent}" opacity=".45"/>'
-    b += text(f'SECTOR {project["order"]:02d} / {project["status"].upper()}', margin, 29, 10.5, accent, "mono")
-    b += glyph(kind,w-47,13,22)
-    if mobile:
-        title, title_end = lines(project["name"].upper(), margin, 66, main_width, 22 if len(project["name"]) > 24 else 25, PAPER, 28)
-        b += title
-        y = title_end + 4
-        deck, end = lines(DECK[project["id"]], margin, y, main_width, 15.5, PAPER, 22)
-        b += deck + rule(margin, end+7, main_width)
-        stack, end = lines(" / ".join(project["stack"][:4]), margin, end+27, main_width, 11.5, MUTED, 17, "mono")
-        b += text("STACK / ", margin, end+5, 9.5, accent, "mono") + stack
-        height = end+35
+    b += glyph(kind,w-48,15,21)
+    b += text(project["name"].upper(), margin, 65, 23 if mobile else 29, PAPER, "sans", font_weight="700")
+    # Long project names receive an explicitly composed two-line title on phones.
+    if mobile and len(project["name"]) > 25:
+        b = text(f'{project["order"]:02d} / {project["status"].upper()}', margin, 29, 11, RED, "mono")
+        t, title_end = lines(project["name"].upper(), margin, 61, w-44, 23, PAPER, 29)
+        b += t
+        y = title_end + 11
     else:
-        title, title_end = lines(project["name"].upper(), margin, 70, main_width, 27, PAPER, 32)
-        b += title
-        deck, end = lines(DECK[project["id"]], margin, title_end+3, main_width, 17.5, PAPER, 25)
-        b += deck + rule(margin, end+6, main_width)
-        b += text("STACK / ", margin, end+25, 9.5, accent, "mono")
-        stack, stack_end = lines(" / ".join(project["stack"][:4]), margin+63, end+25, main_width-63, 12.5, MUTED, 18, "mono")
-        b += stack
-        cx, cy = w-86, 94
-        b += f'<circle cx="{cx}" cy="{cy}" r="47" fill="{BG}" stroke="{LINE}" stroke-width="7"/>'
-        b += f'<circle cx="{cx}" cy="{cy}" r="47" fill="none" stroke="{accent}" stroke-width="2" stroke-dasharray="2 8"/>'
-        b += f'<circle cx="{cx}" cy="{cy}" r="34" fill="none" stroke="{LINE}" stroke-dasharray="2 5"/>'
-        b += text(f'{project["order"]:02d}', cx, cy+7, 24, PAPER, "serif", text_anchor="middle")
-        b += text("SECTOR / 06", cx, cy+24, 8.5, MUTED, "mono", text_anchor="middle")
-        b += text("PROJECT SECTOR", cx, cy+71, 8, accent, "mono", text_anchor="middle")
-        height = max(end+49, stack_end+10, 172)
-    return page(project["name"], w, height, b, project["summary"], "project-summary")
-
-
-def system_atlas(profile, mobile=False):
-    """Render the six curated projects as one static, scan-friendly command map."""
-    projects = {project["id"]: project for project in profile["projects"]}
-    kinds = {"portfolio":"product", "vision":"target", "zenith":"target", "helios":"realtime",
-             "token-usage":"layers", "talks":"network"}
-    if mobile:
-        w, h = 360, 742
-        b = text("SYSTEMS ARCHIVE", 20, 34, 18, PAPER, "serif")
-        b += text("SIX SECTORS / INDEXED BELOW", 20, 57, 9.5, RED, "mono")
-        b += f'<circle cx="310" cy="40" r="24" fill="{BG}" stroke="{RED}"/><circle cx="310" cy="40" r="14" fill="none" stroke="{LINE}" stroke-dasharray="2 4"/>'
-        b += text("06", 310, 44, 11, PAPER, "mono", text_anchor="middle")
-        b += f'<path d="M16 96v558" stroke="{LINE}" stroke-width="2"/>'
-        for i, project_id in enumerate(ORDER):
-            project = projects[project_id]
-            accent = WORLD_TOKENS[project_id]["accent"]
-            x, y, pw, ph = 28, 98+i*91, 314, 76
-            b += f'<path d="M{x+10} {y}h{pw-10}l10 10v{ph-20}l-10 10H{x}v-{ph-10}Z" fill="#0d070a" stroke="{LINE}"/>'
-            b += f'<path d="M{x} {y+11}v{ph-22}" stroke="{accent}" stroke-width="3"/>'
-            b += f'<circle cx="16" cy="{y+ph/2}" r="4" fill="{accent}" class="beacon"/>'
-            b += text(f'{i+1:02d}', x+16, y+29, 14, accent, "mono")
-            b += text(SHORT[project_id], x+60, y+28, 13.5, PAPER, "mono")
-            b += text(project["status"].upper(), x+60, y+52, 9.5, MUTED, "mono")
-            b += glyph(kinds[project_id], x+pw-29, y+18, 17)
-            for tick in range(6):
-                tx = x+60+tick*9
-                b += f'<rect x="{tx}" y="{y+59}" width="6" height="3" fill="{accent if tick == i else LINE}"/>'
-        b += text("SELECT A PROJECT BELOW TO OPEN ITS DOSSIER", 20, 715, 9, MUTED, "mono")
-    else:
-        w, h = 720, 408
-        b = text("COMMAND DECK / SELECTED SYSTEMS", 22, 32, 11.5, RED, "mono")
-        b += text("06 PROJECT WORLDS / INDEXED BELOW", 698, 32, 9, MUTED, "mono", text_anchor="end")
-        b += f'<path d="M18 48h684" stroke="{LINE}"/>'
-        cx, cy = 360, 225
-        xs, top_y, bottom_y, pw, ph = (17, 253, 489), 66, 300, 214, 76
-        for i, project_id in enumerate(ORDER):
-            col, row = i % 3, i // 3
-            x, y = xs[col], top_y if row == 0 else bottom_y
-            ax = x + pw/2
-            accent = WORLD_TOKENS[project_id]["accent"]
-            if row == 0:
-                ex = cx + (ax-cx)*.24
-                ey = cy - 56
-                path = f'M{ax} {y+ph} C{ax} {y+ph+18} {ex} {ey-20} {ex} {ey}'
-            else:
-                ex = cx + (ax-cx)*.24
-                ey = cy + 56
-                path = f'M{ex} {ey} C{ex} {ey+20} {ax} {y-18} {ax} {y}'
-            b += f'<path d="{path}" fill="none" stroke="{accent}" stroke-opacity=".42" stroke-width="1.2" class="edge-flow"/>'
-            b += f'<circle cx="{ex:.1f}" cy="{ey:.1f}" r="3" fill="{accent}" class="beacon"/>'
-        b += f'<circle cx="{cx}" cy="{cy}" r="63" fill="{BG}" stroke="{LINE}" stroke-width="8"/>'
-        b += f'<circle cx="{cx}" cy="{cy}" r="63" fill="none" stroke="{RED}" stroke-width="2" stroke-dasharray="90 306" transform="rotate(-90 {cx} {cy})"/>'
-        b += f'<circle cx="{cx}" cy="{cy}" r="48" fill="none" stroke="{LINE}" stroke-dasharray="2 6"/>'
-        b += f'<circle cx="{cx}" cy="{cy}" r="33" fill="#10070b" stroke="{RED}"/>'
-        b += text("YOR", cx, cy-1, 17, PAPER, "mono", text_anchor="middle")
-        b += text("06 SYSTEMS", cx, cy+17, 8.5, RED, "mono", text_anchor="middle")
-        for i, project_id in enumerate(ORDER):
-            project = projects[project_id]
-            accent = WORLD_TOKENS[project_id]["accent"]
-            col, row = i % 3, i // 3
-            x, y = xs[col], top_y if row == 0 else bottom_y
-            b += f'<path d="M{x+10} {y}h{pw-10}l10 10v{ph-20}l-10 10H{x}v-{ph-10}Z" fill="#0d070a" stroke="{LINE}"/>'
-            b += f'<path d="M{x} {y+11}v{ph-22}" stroke="{accent}" stroke-width="3"/>'
-            b += text(f'SECTOR {i+1:02d} / {project["status"].upper()}', x+13, y+22, 8.7, accent, "mono")
-            b += text(SHORT[project_id], x+13, y+47, 11.4, PAPER, "mono")
-            b += glyph(kinds[project_id], x+pw-32, y+14, 17)
-            for tick in range(6):
-                tx = x+13+tick*9
-                b += f'<rect x="{tx}" y="{y+59}" width="6" height="3" fill="{accent if tick == i else LINE}"/>'
-        b += text("SYSTEM MAP / PROJECT LINKS AND DETAILS FOLLOW", 22, 394, 9, MUTED, "mono")
-    names = "; ".join(f'{projects[key]["name"]} ({projects[key]["status"]})' for key in ORDER)
-    return page("Six-sector systems command atlas", w, h, b,
-                "Illustrative static systems map. " + names + ". Project links and details follow the map.", "systems-atlas")
+        y = 95
+    deck, end = lines(DECK[project["id"]], margin, y, w-44, 16 if mobile else 18)
+    b += deck + rule(margin, end+2, w-44)
+    stack, end = lines(" / ".join(project["stack"][:4]), margin, end+25, w-44, 12 if mobile else 14, MUTED)
+    b += stack
+    return page(project["name"], w, end+18, b, project["summary"], "project-summary")
 
 
 def dossier(project, mobile=False):
@@ -443,24 +307,19 @@ def protocol(kind, profile, mobile=False):
 
 
 def finale(profile,mobile=False):
-    w,h=(360,300) if mobile else (720,278)
+    w,h=(360,266) if mobile else (720,244)
     art=raster(profile["visual_contract"]["delivery"]["supporting_art"]["channel"])
     b=f'<image href="{art}" width="{w}" height="{h}" preserveAspectRatio="xMidYMid slice"/><rect width="{w}" height="{h}" fill="{BG}" opacity=".6"/>'
-    b+=text("OPEN CHANNEL / NEXT OPERATION",24,35,10.5 if mobile else 12,RED,"mono")
-    b+=text("Good ideas deserve",24,94,33 if mobile else 48,PAPER,"serif")
-    b+=text("to become real.",24,135 if mobile else 147,33 if mobile else 48,PAPER,"serif")
-    b+=text(profile["availability"]["status"].upper()+" / REMOTE",24,170 if mobile else 178,9.5 if mobile else 10,RED,"mono")
-    cx,cy=(310,207) if mobile else (630,119)
-    radius=24 if mobile else 42
-    b+=f'<circle cx="{cx}" cy="{cy}" r="{radius}" fill="{BG}" stroke="{RED}" stroke-width="1.5"/><circle cx="{cx}" cy="{cy}" r="{radius-10}" fill="none" stroke="{LINE}" stroke-dasharray="2 5"/>'
-    b+=glyph("arrow",cx-12,cy-12,24)
-    b+=rule(24,h-58,w-48)+text(profile["contact"]["email"],24,h-28,13 if mobile else 16,PAPER,"mono")
+    b+=text("NEXT / TOGETHER",24,35,12,RED,"mono")
+    b+=text("Good ideas deserve",24,93,34 if mobile else 48,PAPER,"serif")
+    b+=text("to become real.",24,135 if mobile else 145,34 if mobile else 48,PAPER,"serif")
+    b+=rule(24,h-66,w-48)+text(profile["contact"]["email"],24,h-35,14 if mobile else 18,PAPER,"mono")
+    b+=glyph("arrow",w-48,h-54,24)
     return page("Start a conversation with Ayush Roy",w,h,b,profile["availability"]["status"])
 
 
 def build_surfaces(profile):
-    manifest={"signal-strip.svg":signal(), "signal-strip-mobile.svg":signal(True), "dossier-toggle.svg":dossier_control(),"dossier-toggle-mobile.svg":dossier_control(True),
-              "systems-atlas.svg":system_atlas(profile), "systems-atlas-mobile.svg":system_atlas(profile, True)}
+    manifest={"signal-strip.svg":signal(), "signal-strip-mobile.svg":signal(True), "dossier-toggle.svg":dossier_control(),"dossier-toggle-mobile.svg":dossier_control(True)}
     for target,label in (("projects","PROJECTS"),("experience","BACKGROUND"),("activity","ACTIVITY"),("contact","CONTACT")):
         manifest[f'jump-{target}.svg']=button(label,"Jump to section","arrow")
     for key,(label,sub,kind) in NAV.items():
