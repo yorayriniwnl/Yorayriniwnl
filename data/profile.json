@@ -312,7 +312,7 @@
       "live": null,
       "summary": "A local-first Manifest V3 Chrome extension for estimating AI token usage across ChatGPT, Claude, Gemini, Perplexity, and Grok, with dashboards, exports, and optional sync.",
       "visual": {
-        "world": "token-usage",
+        "world": "talks",
         "source": "assets/project-token-usage-cinematic-crimson-v8.png",
         "delivery": "assets/project-token-usage-cinematic-crimson-v8-optimized.jpg",
         "evidence": "five-provider local measurement vault with dashboard views and a detached optional sync bridge; no provider-authoritative billing totals are implied"

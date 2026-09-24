@@ -70,23 +70,6 @@ MOTION_PALETTES = {
 }
 
 
-@lru_cache(maxsize=1)
-def motion_color_palette():
-    """Keep the six world accents in the indexed GIF instead of quantizing them away."""
-    swatches = [VOID, DEEP, CRIMSON, SIGNAL, PAPER]
-    for colors in MOTION_PALETTES.values():
-        canvas, deep, accent, signal, _paper, line = colors
-        swatches.extend((canvas, deep, accent, signal, line, mix(deep, PAPER, .34)))
-    swatches = list(dict.fromkeys(swatches))
-    if len(swatches) > 256:
-        raise ValueError("motion reel color palette exceeds the GIF limit")
-    palette_image = Image.new("P", (len(swatches), 1))
-    palette_image.putpalette(
-        [channel for color in swatches for channel in color] + [0] * (768 - len(swatches) * 3)
-    )
-    return palette_image
-
-
 @lru_cache(maxsize=12)
 def font(size):
     return ImageFont.load_default(size=size)
@@ -410,7 +393,7 @@ def build_frame(frame_index, mobile=False, compact=True):
     base_canvas, base_deep, base_accent, base_signal, base_paper, base_line = base_palette
     draw.text((20, 16), "YOR // SYSTEMS ATLAS", font=font(23), fill=base_paper)
     if not mobile:
-        draw.text((930, 22), "06 WORLDS / ONE BUILDER", font=font(13), fill=mix(base_paper, base_line, .5))
+        draw.text((930, 22), "06 WORLDS / ONE RED SIGNAL", font=font(13), fill=mix(base_paper, base_line, .5))
     draw.line((20, 49, size[0] - 20, 49), fill=base_line, width=1)
     draw.line((20, 49, 80, 49), fill=base_signal, width=1)
 
@@ -439,16 +422,24 @@ def build_frame(frame_index, mobile=False, compact=True):
         draw = ImageDraw.Draw(frame)
         draw.text((left + 14, bottom - 23), note, font=font(12), fill=mix(paper, line, .28))
         draw.line((right - 27, bottom - 18, right - 14, bottom - 18), fill=accent, width=1)
-    # The same world-aware palette keeps the still poster vivid and compact.
+    # The reel encoder applies a smaller shared palette later. Returning a
+    # compact poster here keeps the reduced-motion PNG fallback lightweight
+    # as well, without changing its dimensions or its visual hierarchy.
     if compact:
-        return frame.quantize(palette=motion_color_palette(), dither=Image.Dither.NONE)
+        return frame.quantize(colors=16, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.NONE)
     return frame
 
 
 def build_systems_reel_gif(mobile=False):
-    # Use one fixed palette so no project accent disappears between frames.
+    # Keep GIF quantization based on the full RGB render; the compact palette
+    # returned by build_frame is reserved for still-image fallbacks.
     frames = [build_frame(index, mobile, compact=False) for index in range(FRAME_COUNT)]
-    palette = motion_color_palette()
+    # A shared palette prevents frame-to-frame shimmer and keeps transfers small.
+    # Keep the reels visually deep without making a profile README pay for a
+    # photographic palette. The small, shared palette also prevents shimmer
+    # between frames and materially improves GitHub's transfer time.
+    palette_colors = 9 if not mobile else 8
+    palette = frames[0].quantize(colors=palette_colors, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.NONE)
     indexed = [frame.quantize(palette=palette, dither=Image.Dither.NONE) for frame in frames]
     buffer = BytesIO()
     indexed[0].save(buffer, format="GIF", save_all=True, append_images=indexed[1:],
@@ -459,7 +450,7 @@ def build_systems_reel_gif(mobile=False):
 
 def main():
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    for mobile, stem in ((False, "systems-reel-v9"), (True, "systems-reel-mobile-v9")):
+    for mobile, stem in ((False, "systems-reel-v8"), (True, "systems-reel-mobile-v8")):
         path = OUT_DIR / f"{stem}.gif"
         payload = build_systems_reel_gif(mobile)
         path.write_bytes(payload)

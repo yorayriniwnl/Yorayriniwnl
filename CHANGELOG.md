@@ -1,15 +1,5 @@
 # What moved, and why
 
-## Pass 27: a readable six-world command deck
-
-The profile opening is rebuilt around selectable role, availability, project,
-and contact copy. The motion reel now appears beside that introduction, with
-still posters for reduced-motion preferences. Six numbered project entries
-keep their original covers and add visible summaries, stacks, links, and
-expandable proof. The repeated proof cards, atlas, and image-button navigation
-are removed. Project palettes now give Helios, Zenith, Vision, Talks, and Token
-Usage distinct color signatures while preserving the crimson portfolio frame.
-
 ## Pass 26: six-sector command atlas
 
 The profile now opens as a cinematic command deck: the identity hero gains a

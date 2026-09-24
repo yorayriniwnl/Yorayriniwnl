@@ -199,25 +199,20 @@ def _validate_design_tokens(profile: dict[str, Any]) -> None:
     required_worlds = {"portfolio", "helios", "zenith", "vision", "talks", "token-usage"}
     if set(tokens["worlds"]) != required_worlds:
         raise ProfileDataError("design token worlds must match the six visual systems")
-    brand_colors = {tokens["color"]["crimson"], tokens["color"]["secondaryCrimson"]}
-    accents = {world["accent"] for world in tokens["worlds"].values()}
-    if len(accents) != len(required_worlds):
-        raise ProfileDataError("each visual world must have its own accent color")
-    if tokens["worlds"]["portfolio"]["accent"] != tokens["color"]["crimson"]:
-        raise ProfileDataError("the portfolio world must retain the global crimson accent")
-    if any(tokens["worlds"][world_id]["accent"] in brand_colors for world_id in required_worlds - {"portfolio"}):
-        raise ProfileDataError("project worlds must use accents distinct from the portfolio frame")
-    for project in profile["projects"]:
-        if project["visual"]["world"] != project["id"]:
-            raise ProfileDataError(f"project {project['id']} must use its matching visual world token")
     for world_id, world in tokens["worlds"].items():
         _require(
             world,
             {"label", "canvas", "surface", "surface_alt", "ink", "muted", "accent", "accent_soft", "line", "glow"},
             f"visual world {world_id}",
         )
-        if world["accent_soft"] == world["accent"]:
-            raise ProfileDataError(f"visual world {world_id} needs a separate soft accent")
+        if world["accent"] not in {tokens["color"]["crimson"], tokens["color"]["secondaryCrimson"]}:
+            raise ProfileDataError(
+                f"visual world {world_id} must use a crimson-family accent"
+            )
+        if world["accent_soft"] != tokens["color"]["signal"]:
+            raise ProfileDataError(
+                f"visual world {world_id} must use the shared blush signal"
+            )
 
 
 def _validate_repository_audit() -> None:

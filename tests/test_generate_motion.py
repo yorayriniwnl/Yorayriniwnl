@@ -37,15 +37,18 @@ class GenerateMotionTests(unittest.TestCase):
         for label in ("PORTFOLIO", "HELIOS", "ZENITH", "VISION", "TALKS", "TOKEN USAGE"):
             self.assertIn(label, labels)
 
-    def test_each_motion_world_uses_its_own_design_token_palette(self):
+    def test_every_motion_world_stays_inside_the_crimson_contract(self):
+        crimson_family = {
+            generate_motion.rgb(generate_motion.PALETTE["crimson"]),
+            generate_motion.rgb(generate_motion.PALETTE["deep_crimson"]),
+            generate_motion.rgb(generate_motion.TOKENS["color"]["secondaryCrimson"]),
+        }
         self.assertEqual(len(generate_motion.SCENES), 6)
-        self.assertEqual(len({colors[2] for colors in generate_motion.MOTION_PALETTES.values()}), 6)
-        for (code, label, _note, _renderer, colors), kind in zip(
-            generate_motion.SCENES, generate_motion.MOTION_PALETTES
-        ):
+        for code, label, _note, _renderer, colors in generate_motion.SCENES:
             with self.subTest(world=f"{code} {label}"):
-                self.assertEqual(colors, generate_motion.MOTION_PALETTES[kind])
-                self.assertLessEqual(max(colors[0]), 20)
+                self.assertIn(colors[2], crimson_family)
+                self.assertIn(colors[3], {generate_motion.SIGNAL, generate_motion.rgb(generate_motion.TOKENS["color"]["signal"])})
+                self.assertLessEqual(max(colors[0]), 10)
                 self.assertLessEqual(max(colors[1]), 60)
 
     def test_posters_are_first_frames_and_motion_is_periodic(self):
@@ -53,9 +56,6 @@ class GenerateMotionTests(unittest.TestCase):
             poster = generate_motion.build_frame(0, mobile)
             cycle = generate_motion.build_frame(generate_motion.FRAME_COUNT, mobile)
             self.assertIsNone(ImageChops.difference(poster, cycle).getbbox())
-            visible_colors = {color for _count, color in poster.convert("RGB").getcolors(1_000_000)}
-            for palette in generate_motion.MOTION_PALETTES.values():
-                self.assertIn(palette[2], visible_colors)
             buffer = BytesIO()
             poster.save(buffer, format="PNG", optimize=True)
             self.assertLess(len(buffer.getvalue()), 50_000)
