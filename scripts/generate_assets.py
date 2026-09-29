@@ -45,7 +45,7 @@ PALETTE = {
 
 CONFIG = {
     "name": IDENTITY["name"],
-    "role": f'{IDENTITY["role"].upper()}  ·  {IDENTITY["specialty"].upper()}',
+    "role": IDENTITY["specialty"].upper(),
     "width": 1500,
     "height": 300,
     # Steam-profile palette: a pure-black canvas, translucent black panels,
