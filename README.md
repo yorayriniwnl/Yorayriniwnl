@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<a href="https://www.yorayriniwnl.in"><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/hero.svg?rev=career-v1" width="100%" alt="Ayush Roy, Associate Engineer · Automotive Technology Services and Applied ML Builder"/></a>
+<a href="https://www.yorayriniwnl.in"><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/hero.svg?rev=career-v2" width="100%" alt="Ayush Roy, Applied ML Builder"/></a>
 
 <p align="center">
 <a href="#user-content-selected-systems"><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/jump-projects.svg?rev=redline-v2" width="145" alt="Jump to selected projects"/></a>
@@ -11,11 +11,11 @@
 <a href="#user-content-open-channel"><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/jump-contact.svg?rev=redline-v2" width="145" alt="Jump to contact and collaboration"/></a>
 </p>
 
-<picture><source media="(max-width: 600px)" srcset="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/identity-console-mobile.svg?rev=career-v1"/><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/identity-console.svg?rev=career-v1" width="100%" alt="Currently Associate Engineer · Automotive Technology Services. I build ambitious product systems where polished interfaces meet realtime backends, applied machine learning, and the physical world. Open to jobs. Bengaluru (Bangalore), Karnataka, India."/></picture>
+<picture><source media="(max-width: 600px)" srcset="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/identity-console-mobile.svg?rev=career-v2"/><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/identity-console.svg?rev=career-v2" width="100%" alt="I build ambitious product systems where polished interfaces meet realtime backends, applied machine learning, and the physical world. Open to jobs. Bengaluru (Bangalore), Karnataka, India."/></picture>
 
 <p align="center">
 <a href="https://www.yorayriniwnl.in"><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/nav-portfolio.svg?rev=redline-v2" width="145" alt="Open Ayush Roy portfolio"/></a>
-<a href="https://github.com/yorayriniwnl/Yorayriniwnl/blob/main/output/pdf/Ayush_Roy_Resume_Public.pdf"><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/nav-resume.svg?rev=redline-v2" width="145" alt="View Ayush Roy public resume"/></a>
+<a href="https://www.yorayriniwnl.in/resume"><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/nav-resume.svg?rev=redline-v2" width="145" alt="View Ayush Roy public resume"/></a>
 <a href="https://www.linkedin.com/in/yorayriniwnl"><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/nav-linkedin.svg?rev=redline-v2" width="145" alt="Connect on LinkedIn"/></a>
 <a href="mailto:ayushroy.dev@gmail.com"><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/nav-email.svg?rev=redline-v2" width="145" alt="Email Ayush Roy"/></a>
 </p>
@@ -158,7 +158,7 @@
 <picture><source media="(max-width: 600px)" srcset="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/field-notes-mobile.svg?rev=redline-v1"/><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/field-notes.svg?rev=redline-v1" width="100%" alt="Telecom &amp; Data Network Intern at Bharat Sanchar Nigam Limited (BSNL), June 2026. Completed an RGMTTC-certified four-week program in telecom, data-network systems, and infrastructure. B.Tech in Computer Science and Communication Engineering at KIIT Deemed University, 2023-2027 (Expected). Coursework: Data Structures &amp; Algorithms; Operating Systems; Database Management Systems; Computer Networks; Object-Oriented Programming."/></picture>
 
 <p align="center">
-<a href="https://github.com/yorayriniwnl/Yorayriniwnl/blob/main/output/pdf/Ayush_Roy_Resume_Public.pdf"><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/nav-resume.svg?rev=redline-v2" width="145" alt="View the public resume"/></a>
+<a href="https://www.yorayriniwnl.in/resume"><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/nav-resume.svg?rev=redline-v2" width="145" alt="View the public resume"/></a>
 </p>
 
 <picture><source media="(max-width: 600px)" srcset="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/section-arsenal-mobile.svg?rev=redline-v1"/><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/section-arsenal.svg?rev=redline-v1" width="100%" alt="Section 03: technical range"/></picture>
@@ -203,9 +203,9 @@
 
 <a id="open-channel"></a>
 
-<picture><source media="(max-width: 600px)" srcset="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/section-channel-mobile.svg?rev=career-v1"/><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/section-channel.svg?rev=career-v1" width="100%" alt="Section 06: jobs and collaboration"/></picture>
+<picture><source media="(max-width: 600px)" srcset="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/section-channel-mobile.svg?rev=career-v2"/><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/section-channel.svg?rev=career-v2" width="100%" alt="Section 06: jobs and collaboration"/></picture>
 
-<a href="mailto:ayushroy.dev@gmail.com"><picture><source media="(max-width: 600px)" srcset="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/finale-mobile.svg?rev=career-v1"/><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/finale.svg?rev=career-v1" width="100%" alt="Start a conversation with Ayush Roy"/></picture></a>
+<a href="mailto:ayushroy.dev@gmail.com"><picture><source media="(max-width: 600px)" srcset="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/finale-mobile.svg?rev=career-v2"/><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/finale.svg?rev=career-v2" width="100%" alt="Start a conversation with Ayush Roy"/></picture></a>
 
 <p align="center">
 <a href="mailto:ayushroy.dev@gmail.com"><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/nav-email.svg?rev=redline-v2" width="145" alt="Email Ayush Roy"/></a>
