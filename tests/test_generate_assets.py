@@ -51,11 +51,11 @@ class GenerateAssetsTests(unittest.TestCase):
             self.assertIn('prefers-reduced-motion: reduce',svg)
 
     def test_current_role_and_job_availability_reach_public_surfaces(self):
-        role = generate_assets.PROFILE['identity']['role'].upper()
+        role = generate_assets.PROFILE['identity']['specialty'].upper()
         availability = generate_assets.PROFILE['availability']['status'].upper()
         self.assertIn(role, self.assets['hero.svg'])
         for suffix in ('', '-mobile'):
-            self.assertIn('CURRENT / ' + role, self.assets[f'identity-console{suffix}.svg'])
+            self.assertIn('FOCUS / ' + role, self.assets[f'identity-console{suffix}.svg'])
             self.assertIn(availability, self.assets[f'identity-console{suffix}.svg'])
             self.assertIn('JOBS / COLLABORATION', self.assets[f'section-channel{suffix}.svg'])
         for name, svg in self.assets.items():
