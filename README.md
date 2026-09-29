@@ -11,7 +11,7 @@
 <a href="#user-content-open-channel"><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/jump-contact.svg?rev=redline-v2" width="145" alt="Jump to contact and collaboration"/></a>
 </p>
 
-<picture><source media="(max-width: 600px)" srcset="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/identity-console-mobile.svg?rev=career-v2"/><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/identity-console.svg?rev=career-v2" width="100%" alt="I build backend-heavy product systems with Python, TypeScript, PostgreSQL, Redis, realtime APIs, automated testing, and applied machine learning. Open to software engineering roles. Bengaluru (Bangalore), Karnataka, India."/></picture>
+<picture><source media="(max-width: 600px)" srcset="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/identity-console-mobile.svg?rev=career-v2"/><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/identity-console.svg?rev=career-v2" width="100%" alt="I build backend-heavy product systems with Python, TypeScript, PostgreSQL, Redis, realtime APIs, automated testing, and applied machine learning. Open to software engineering roles. Bhubaneswar, Odisha, India."/></picture>
 
 <p align="center">
 <a href="https://www.yorayriniwnl.in"><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/nav-portfolio.svg?rev=redline-v2" width="145" alt="Open Ayush Roy portfolio"/></a>
