@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<a href="https://www.yorayriniwnl.in"><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/hero.svg?rev=career-v2" width="100%" alt="Ayush Roy, Applied ML Builder"/></a>
+<a href="https://www.yorayriniwnl.in"><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/hero.svg?rev=career-v2" width="100%" alt="Ayush Roy, Backend / Full-Stack Software Engineer"/></a>
 
 <p align="center">
 <a href="#user-content-selected-systems"><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/jump-projects.svg?rev=redline-v2" width="145" alt="Jump to selected projects"/></a>
