@@ -31,8 +31,8 @@ RESPONSIVE_ASSETS = {
 }
 MOTION_ASSETS = ("systems-reel-v8.gif", "systems-reel-mobile-v8.gif", "systems-reel-v8-still.png", "systems-reel-mobile-v8-still.png")
 ASSET_REVISIONS = {
-    "hero.svg": "career-v1",
-    **{f'{name}{suffix}.svg': "career-v1" for name in ("identity-console", "section-channel", "finale") for suffix in ("", "-mobile")},
+    "hero.svg": "career-v2",
+    **{f'{name}{suffix}.svg': "career-v2" for name in ("identity-console", "section-channel", "finale") for suffix in ("", "-mobile")},
     "project-portfolio-v2.svg": "raster-v8", "project-portfolio-mobile-v2.svg": "raster-v8",
     "project-helios.svg": "raster-v15", "project-zenith.svg": "raster-v14",
     "project-vision.svg": "raster-v16", "project-talks.svg": "raster-v14", "project-token-usage.svg": "raster-v15",
