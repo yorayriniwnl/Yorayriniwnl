@@ -77,7 +77,7 @@ class ReadmeTests(unittest.TestCase):
     def test_current_career_status_is_accessible_and_cache_busted(self):
         self.assertNotIn('Currently Associate Engineer · Automotive Technology Services.', self.readme)
         self.assertIn('Backend / Full-Stack Software Engineer', self.readme)
-        self.assertIn('Open to jobs', self.readme)
+        self.assertIn('Open to software engineering roles', self.readme)
         self.assertNotIn('internships', self.readme.lower())
         for asset in ('hero.svg', 'identity-console.svg', 'identity-console-mobile.svg', 'section-channel.svg', 'section-channel-mobile.svg'):
             self.assertIn(f'/output/{asset}?rev=career-v2', self.readme)

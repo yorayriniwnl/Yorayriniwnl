@@ -1,6 +1,7 @@
 """Guard the public PDF against dark-theme tokens leaking onto white paper."""
 import importlib.util
 import unittest
+import tempfile
 from pathlib import Path
 
 SCRIPT = Path(__file__).parents[1] / 'scripts' / 'generate_public_resume.py'
@@ -23,14 +24,19 @@ class PublicResumeTests(unittest.TestCase):
                 contrast = (luminance(background) + .05) / (luminance(ink) + .05)
                 self.assertGreaterEqual(contrast, 4.5)
 
-    def test_published_resume_has_current_role_and_preserves_history(self):
-        resume.validate_resume(resume.DEFAULT_OUTPUT)
-        reader = resume.PdfReader(resume.DEFAULT_OUTPUT)
-        text = reader.pages[0].extract_text()
-        self.assertIn('ASSOCIATE ENGINEER', text)
-        self.assertIn('Open to jobs', text)
-        self.assertIn('Telecom & Data Network Intern', text)
-        self.assertIn('Associate Engineer', reader.metadata['/Title'])
+    def test_generated_resume_has_current_role_and_preserves_history(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            raw = Path(tmp) / 'resume.raw.pdf'
+            output = Path(tmp) / 'resume.pdf'
+            resume.build_resume(raw)
+            resume.sanitize_metadata(raw, output)
+            resume.validate_resume(output)
+            reader = resume.PdfReader(output)
+            text = reader.pages[0].extract_text()
+            self.assertIn('BACKEND / FULL-STACK SOFTWARE ENGINEER', text)
+            self.assertIn('Open to software engineering roles', text)
+            self.assertIn('Telecom & Data Network Intern', text)
+            self.assertIn('Backend / Full-Stack Software Engineer', reader.metadata['/Title'])
 
     def test_header_role_line_stays_clear_of_contact_column(self):
         _, bold = resume.register_fonts()
