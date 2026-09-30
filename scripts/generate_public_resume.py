@@ -8,7 +8,7 @@ from pathlib import Path
 
 from pypdf import PdfReader, PdfWriter
 from reportlab.lib.colors import Color, HexColor
-from reportlab.lib.pagesizes import LETTER
+from reportlab.lib.pagesizes import A4
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
@@ -135,183 +135,221 @@ def draw_metric(pdf: canvas.Canvas, value: str, label: str, x: float, y: float, 
 def build_resume(raw_output: Path) -> None:
     profile = load_profile()
     regular, bold = register_fonts()
-    width, height = LETTER
+    width, height = A4
     margin = 34
     content_width = width - margin * 2
-    gap = 18
-    right_width = 176
-    left_width = content_width - right_width - gap
-    left_x = margin
-    right_x = left_x + left_width + gap
 
     raw_output.parent.mkdir(parents=True, exist_ok=True)
-    pdf = canvas.Canvas(str(raw_output), pagesize=LETTER, pageCompression=1)
+    pdf = canvas.Canvas(str(raw_output), pagesize=A4, pageCompression=1)
     pdf.setTitle(f'{profile["identity"]["name"]} - {profile["identity"]["role"]} Resume')
     pdf.setAuthor("Ayush Roy")
     pdf.setSubject("Public software engineering resume")
 
+    # Header
     pdf.setFillColor(INK)
-    pdf.setFont(bold, 28)
-    pdf.drawString(margin, height - 52, profile["identity"]["name"].upper())
-    header_right_x = 357
-    header_role, header_specialty = header_lines(profile)
-    header_width = header_right_x - margin - 10
-    pdf.setFillColor(CRIMSON)
-    pdf.setFont(bold, fitted_font_size(header_role, bold, header_width, 10))
-    pdf.drawString(margin, height - 70, header_role)
-    pdf.setFont(bold, fitted_font_size(header_specialty, bold, header_width, 8.2))
-    pdf.drawString(margin, height - 80, header_specialty)
+    pdf.setFont(bold, 24)
+    name = profile["identity"]["name"].upper()
+    pdf.drawCentredString(width / 2, height - 43, name)
+
+    role = profile["identity"]["role"]
+    pdf.setFont(bold, fitted_font_size(role, bold, content_width, 11.2, min_size=9.0))
+    pdf.drawCentredString(width / 2, height - 60, role)
+
+    y = height - 77
+    contact_parts = [
+        ("ayushroy.dev@gmail.com", "mailto:ayushroy.dev@gmail.com"),
+        ("GitHub", profile["contact"]["github"]),
+        ("Portfolio", profile["contact"]["portfolio"]),
+        ("LinkedIn", profile["contact"]["linkedin"]),
+    ]
+    x = margin
+    pdf.setFont(regular, 7.8)
+    for index, (label, url) in enumerate(contact_parts):
+        if index:
+            pdf.setFillColor(MUTED)
+            pdf.drawString(x, y, "  |  ")
+            x += pdfmetrics.stringWidth("  |  ", regular, 7.8)
+        x += draw_link(pdf, label, url, x, y, regular, 7.8)
 
     pdf.setFillColor(MUTED)
-    pdf.setFont(regular, 7.4)
-    pdf.drawRightString(width - margin, height - 47, profile["identity"]["location"])
-    pdf.drawRightString(width - margin, height - 59, profile["availability"]["status"] + (" / remote" if profile["availability"]["remote"] else ""))
-    draw_link(pdf, "ayushroy.dev@gmail.com", "mailto:ayushroy.dev@gmail.com", header_right_x, height - 73, regular, 7.1)
-    draw_link(pdf, "yorayriniwnl.in", profile["contact"]["portfolio"], 470, height - 73, regular, 7.1)
+    pdf.setFont(regular, 8.5)
+    location = profile["identity"]["location"]
+    pdf.drawRightString(width - margin, y, location)
 
-    pdf.setStrokeColor(CRIMSON)
-    pdf.setLineWidth(2)
-    pdf.line(margin, height - 84, width - margin, height - 84)
+    y -= 16
+    summary = (
+        "B.Tech CSCE student at KIIT (2027) building backend-heavy product systems with Python, "
+        "TypeScript, PostgreSQL, Redis, realtime APIs, automated testing, Docker, and applied ML."
+    )
+    y = draw_wrapped(pdf, summary, margin, y, content_width, regular, 8.7, 11.2, MUTED, 2) - 6
 
-    y_left = height - 107
-    y_left = draw_section_title(pdf, "Profile", left_x, y_left, left_width, bold)
-    y_left = draw_wrapped(
+    # Experience and selection
+    y = draw_section_title(pdf, "Experience & Selection", margin, y, content_width, bold)
+    pdf.setFillColor(INK)
+    pdf.setFont(bold, 9.5)
+    pdf.drawString(margin, y, "KPIT Technologies - Associate Engineer 2027 (Campus Selection)")
+    pdf.setFillColor(MUTED)
+    pdf.setFont(regular, 7.5)
+    pdf.drawRightString(width - margin, y, "SELECTED AUG 2026")
+    y -= 12
+    y = draw_wrapped(
         pdf,
-        profile["identity"]["positioning"] + " " + profile["availability"]["status"] + ".",
-        left_x,
-        y_left,
-        left_width,
+        "Selected through KIIT campus recruitment; Letter of Intent accepted. Role commencement and onboarding are pending, so this is listed as a selection rather than current employment.",
+        margin + 8,
+        y,
+        content_width - 8,
         regular,
-        8.8,
-        12,
-        max_lines=4,
-    ) - 7
+        8.2,
+        10.6,
+        INK,
+        3,
+    ) - 6
 
-    y_left = draw_section_title(pdf, "Experience", left_x, y_left, left_width, bold)
     experience = profile["experience"][0]
     pdf.setFillColor(INK)
-    pdf.setFont(bold, 9.6)
-    pdf.drawString(left_x, y_left, experience["role"])
+    pdf.setFont(bold, 9.5)
+    pdf.drawString(margin, y, "Bharat Sanchar Nigam Limited (BSNL) - Telecom & Data Network Intern")
     pdf.setFillColor(MUTED)
-    pdf.setFont(regular, 7.1)
-    pdf.drawRightString(left_x + left_width, y_left, experience["period"].upper())
-    y_left -= 12
-    pdf.setFillColor(CRIMSON)
-    pdf.setFont(bold, 7.5)
-    pdf.drawString(left_x, y_left, "BSNL / RGMTTC-CERTIFIED / CHENNAI HYBRID")
-    y_left -= 12
-    y_left = draw_wrapped(pdf, experience["summary"], left_x, y_left, left_width, regular, 8.1, 10.8, max_lines=3) - 9
+    pdf.setFont(regular, 7.5)
+    pdf.drawRightString(width - margin, y, "JUN 2026")
+    y -= 12
+    y = draw_wrapped(
+        pdf,
+        "Completed a 4-week RGMTTC-certified hybrid program in Chennai covering telecom infrastructure, data-network systems, and operational concepts.",
+        margin + 8,
+        y,
+        content_width - 8,
+        regular,
+        8.2,
+        10.6,
+        INK,
+        2,
+    ) - 7
 
-    y_left = draw_section_title(pdf, "Selected Systems", left_x, y_left, left_width, bold)
-    project_ids = ["portfolio", "vision", "zenith", "helios", "token-usage", "talks"]
-    project_lookup = {project["id"]: project for project in profile["projects"]}
-    vision_accuracy = next(
-        proof for proof in project_lookup["vision"]["proof"] if "%" in proof
-    )
-    project_notes = {
-        "portfolio": "4,000 GPU particles / 24 tests across 5 suites / automated GitHub sync",
-        "helios": "FastAPI + WebSocket telemetry / targeted anomaly alerts / Docker Compose",
-        "zenith": "3D roof planning / energy simulation / subsidy, ROI, and payback analysis",
-        "vision": f"LBP + GLCM texture features / calibrated SVM / {vision_accuracy}",
-        "token-usage": "Manifest V3 multi-AI usage cockpit / local-first capture / dashboards, exports, optional sync",
-        "talks": "Realtime messaging / auth and conversation APIs / typed responsive UI",
-    }
-    for project_id in project_ids:
-        project = project_lookup[project_id]
+    # Selected projects
+    y = draw_section_title(pdf, "Selected Engineering Projects", margin, y, content_width, bold)
+    projects = [
+        {
+            "title": "CandidateX - Candidate Capability Intelligence",
+            "period": "SEP 2026 - PRESENT",
+            "url": "https://github.com/yorayriniwnl/CandidateX",
+            "stack": "Python, FastAPI, Next.js, PostgreSQL, Redis, Docker",
+            "bullets": [
+                "Built a research prototype for synthetic candidate documents and selected public technical evidence, producing provenance-linked evidence graphs, role-aware capability signals, contradiction diagnostics, and targeted interview probes.",
+                "Implemented static repository analysis without executing untrusted code; the repository documents 131 backend unit, golden, property, security, database, and theorem tests plus GitHub Actions validation.",
+                "Kept experiment provenance explicit: the 4,800-sample repository ablation is separate from the paper's 28,800 synthetic candidate-role benchmark; neither is claimed as real-world hiring validity.",
+            ],
+        },
+        {
+            "title": "Yor Talks V2 - Realtime Social Platform",
+            "period": "2026",
+            "url": "https://github.com/yorayriniwnl/yor-talksv2",
+            "stack": "React, Vite, Express 5, Socket.IO, PostgreSQL, Drizzle, Redis",
+            "bullets": [
+                "Engineered authenticated REST and Socket.IO workflows, PostgreSQL/Drizzle persistence, Redis-backed queues, messaging, notifications, privacy controls, and server-owned authorization.",
+                "Added regression coverage for audience visibility, stale-cache authorization, session boundaries, database migrations, failure handling, and browser flows; production deployment remains explicitly gated on external infrastructure checks.",
+            ],
+        },
+        {
+            "title": "Yor Token Usage - Privacy-Aware AI Usage Analytics",
+            "period": "APR 2026 - PRESENT",
+            "url": "https://github.com/yorayriniwnl/Yor_Token_Usage",
+            "stack": "JavaScript, Chrome MV3, Node.js, PostgreSQL, Redis, Playwright",
+            "bullets": [
+                "Built a local-first Manifest V3 extension estimating token usage across ChatGPT, Claude, Gemini, Perplexity, and Grok without uploading prompt text.",
+                "Added optional PostgreSQL/Redis sync, OIDC/JWKS architecture, idempotent batching, Playwright regressions, and explicit calibration/error-bound reporting.",
+            ],
+        },
+    ]
+
+    for project in projects:
         pdf.setFillColor(INK)
-        pdf.setFont(bold, 9.2)
-        pdf.drawString(left_x, y_left, project["name"])
-        status = project["status"].upper()
-        pdf.setFillColor(CRIMSON)
-        pdf.setFont(bold, 6.3)
-        pdf.drawRightString(left_x + left_width, y_left, status)
-        y_left -= 11
-        y_left = draw_wrapped(pdf, project_notes[project_id], left_x, y_left, left_width, regular, 7.8, 10.2, MUTED, 2)
-        label = project["live"] or project["repo"]
-        visible = label.removeprefix("https://").removeprefix("www.")
-        draw_link(pdf, visible, label, left_x, y_left, regular, 7.0)
-        y_left -= 16
+        pdf.setFont(bold, 9.35)
+        pdf.drawString(margin, y, project["title"])
+        pdf.setFillColor(MUTED)
+        pdf.setFont(regular, 7.2)
+        pdf.drawRightString(width - margin, y, project["period"])
+        y -= 11
 
-    y_left = draw_section_title(pdf, "Build Record", left_x, y_left, left_width, bold)
-    for achievement in profile["achievements"]:
-        pdf.setFillColor(CRIMSON)
-        pdf.circle(left_x + 2.5, y_left + 2.5, 1.8, fill=1, stroke=0)
-        y_left = draw_wrapped(pdf, achievement, left_x + 10, y_left, left_width - 10, regular, 7.9, 10.5, INK, 2) - 5
+        link_label = project["url"].removeprefix("https://")
+        x_after = draw_link(pdf, link_label, project["url"], margin, y, regular, 7.4)
+        pdf.setFillColor(MUTED)
+        pdf.setFont(regular, 7.4)
+        pdf.drawString(margin + x_after + 7, y, "|  " + project["stack"])
+        y -= 11
 
-    y_right = height - 107
-    y_right = draw_section_title(pdf, "Proof", right_x, y_right, right_width, bold)
-    metric_width = (right_width - 8) / 2
-    metrics = profile["proof"]
-    draw_metric(pdf, metrics[0]["value"], "END-TO-END APPS", right_x, y_right, metric_width, bold, regular)
-    draw_metric(pdf, metrics[1]["value"], "AUTOMATED TESTS", right_x + metric_width + 8, y_right, metric_width, bold, regular)
-    y_right -= 51
-    draw_metric(pdf, metrics[2]["value"], "HELD-OUT ACCURACY", right_x, y_right, metric_width, bold, regular)
-    draw_metric(pdf, metrics[3]["value"], "DEVPOST BUILDS", right_x + metric_width + 8, y_right, metric_width, bold, regular)
-    y_right -= 60
+        for bullet_text in project["bullets"]:
+            pdf.setFillColor(CRIMSON)
+            pdf.circle(margin + 2.2, y + 2.2, 1.45, fill=1, stroke=0)
+            y = draw_wrapped(
+                pdf,
+                bullet_text,
+                margin + 9,
+                y,
+                content_width - 9,
+                regular,
+                8.05,
+                10.1,
+                INK,
+                3,
+            ) - 2
+        y -= 2
 
-    y_right = draw_section_title(pdf, "Core Toolkit", right_x, y_right, right_width, bold)
-    compact_skills = {
-        "PRODUCT": "TypeScript, React, Next.js, Three.js, Tailwind",
-        "BACKEND": "Python, FastAPI, Node.js, REST, WebSocket, SQL",
-        "APPLIED ML": "OpenCV, Scikit-Learn, SVM, LBP, GLCM",
-        "PLATFORM": "Docker, GitHub Actions, Vercel, Linux, Vitest",
-    }
-    for label, values in compact_skills.items():
-        pdf.setFillColor(CRIMSON)
-        pdf.setFont(bold, 7.1)
-        pdf.drawString(right_x, y_right, label)
-        y_right -= 10
-        y_right = draw_wrapped(pdf, values, right_x, y_right, right_width, regular, 7.8, 10.2, MUTED, 3) - 8
-
-    y_right = draw_section_title(pdf, "Education", right_x, y_right, right_width, bold)
+    # Education
+    y = draw_section_title(pdf, "Education", margin, y, content_width, bold)
     education = profile["education"][0]
     pdf.setFillColor(INK)
-    pdf.setFont(bold, 8.6)
-    pdf.drawString(right_x, y_right, "KIIT DEEMED UNIVERSITY")
-    y_right -= 12
-    y_right = draw_wrapped(pdf, education["degree"], right_x, y_right, right_width, regular, 7.8, 10.2, MUTED, 3)
+    pdf.setFont(bold, 9.3)
+    pdf.drawString(margin, y, "KIIT Deemed University - B.Tech, Computer Science & Communication Engineering")
     pdf.setFillColor(MUTED)
-    pdf.setFont(regular, 7.3)
-    pdf.drawString(right_x, y_right, education["period"])
-    y_right -= 19
+    pdf.setFont(regular, 7.4)
+    pdf.drawRightString(width - margin, y, "2023 - 2027")
+    y -= 12
+    y = draw_wrapped(
+        pdf,
+        "Relevant coursework: Data Structures & Algorithms, Operating Systems, DBMS, Computer Networks, Object-Oriented Programming.",
+        margin,
+        y,
+        content_width,
+        regular,
+        8.05,
+        10.1,
+        INK,
+        2,
+    ) - 6
 
-    y_right = draw_section_title(pdf, "Expanding Into", right_x, y_right, right_width, bold)
-    expanding = "LLMs, RAG, AI agents, LangChain, AWS S3/Lambda, vector databases"
-    y_right = draw_wrapped(pdf, expanding, right_x, y_right, right_width, regular, 7.8, 10.2, MUTED, 4) - 9
-
-    y_right = draw_section_title(pdf, "Certifications", right_x, y_right, right_width, bold)
-    for certification in profile["certifications"][:3]:
-        pdf.setFillColor(INK)
-        pdf.setFont(bold, 7.4)
-        y_right = draw_wrapped(pdf, certification["name"], right_x, y_right, right_width, bold, 7.4, 9.6, INK, 2)
-        pdf.setFillColor(MUTED)
-        pdf.setFont(regular, 6.8)
-        pdf.drawString(right_x, y_right, f"{certification['issuer']} / {certification['date']}")
-        y_right -= 13
-
-    y_right = draw_section_title(pdf, "Links", right_x, y_right, right_width, bold)
-    links = [
-        ("GitHub", profile["contact"]["github"]),
-        ("LinkedIn", profile["contact"]["linkedin"]),
-        ("Devpost", profile["contact"]["devpost"]),
+    # Skills
+    y = draw_section_title(pdf, "Technical Skills", margin, y, content_width, bold)
+    skill_lines = [
+        ("Languages", "Python, TypeScript, JavaScript, SQL | Foundational: Java, C, C++"),
+        ("Backend & Databases", "FastAPI, Flask, Node.js, Express, PostgreSQL, Redis, SQLAlchemy, REST APIs, WebSocket, Socket.IO"),
+        ("Frontend", "React, Next.js, Vite, HTML/CSS, Tailwind CSS"),
+        ("Testing", "Pytest, Playwright, Vitest, unit, integration, E2E testing"),
+        ("DevOps & Tooling", "Docker, Docker Compose, Git, GitHub Actions, Linux, Vercel"),
+        ("Applied ML", "OpenCV, scikit-learn, SVM, feature engineering, model evaluation"),
     ]
-    for label, url in links:
-        draw_link(pdf, f"{label}  /  {url.removeprefix('https://').removeprefix('www.')}", url, right_x, y_right, regular, 6.9)
-        y_right -= 13
+    for label, values in skill_lines:
+        pdf.setFillColor(CRIMSON)
+        pdf.setFont(bold, 7.9)
+        pdf.drawString(margin, y, label + ":")
+        label_width = pdfmetrics.stringWidth(label + ": ", bold, 7.9)
+        pdf.setFillColor(INK)
+        pdf.setFont(regular, 7.9)
+        pdf.drawString(margin + label_width, y, values)
+        y -= 10.0
 
-    if min(y_left, y_right) < 38:
-        raise RuntimeError(f"resume overflowed the one-page budget: left={y_left:.1f}, right={y_right:.1f}")
+    if y < 34:
+        raise RuntimeError(f"resume overflowed the one-page budget: y={y:.1f}")
 
     pdf.setStrokeColor(HAIRLINE)
     pdf.setLineWidth(0.6)
-    pdf.line(margin, 29, width - margin, 29)
+    pdf.line(margin, 24, width - margin, 24)
     pdf.setFillColor(MUTED)
-    pdf.setFont(regular, 6.3)
-    pdf.drawString(margin, 18, "PUBLIC RESUME / UPDATED SEPTEMBER 2026")
-    pdf.drawRightString(width - margin, 18, "BUILDING SOFTWARE FOR THE PHYSICAL WORLD")
+    pdf.setFont(regular, 6.2)
+    pdf.drawString(margin, 14, "PUBLIC RESUME / UPDATED SEPTEMBER 2026")
+    pdf.drawRightString(width - margin, 14, "BACKEND / FULL-STACK SOFTWARE ENGINEERING")
     pdf.showPage()
     pdf.save()
-
 
 def sanitize_metadata(raw_path: Path, output_path: Path) -> None:
     profile = load_profile()
@@ -339,25 +377,48 @@ def validate_resume(output_path: Path) -> None:
         raise RuntimeError("public resume must remain exactly one page")
 
     text = "\n".join(page.extract_text() or "" for page in reader.pages)
-    forbidden = ("+91", "89189", "yorayriniwnl@gmail.com", "deep learning", "CNN", "open to SWE internships", "open to software engineering internships", "CGPA")
+    forbidden = (
+        "+91",
+        "89189",
+        "yorayriniwnl@gmail.com",
+        "deep learning",
+        "CNN",
+        "open to SWE internships",
+        "open to software engineering internships",
+        "CGPA",
+        "Associate Engineer · Automotive Technology Services",
+        "Expanding Into",
+        "LangChain",
+    )
     leaked = [term for term in forbidden if term.lower() in text.lower()]
     if leaked:
         raise RuntimeError(f"private or stale resume content found: {', '.join(leaked)}")
 
     profile = load_profile()
-    required = ("ayushroy.dev@gmail.com", "LBP", "GLCM", "SVM", "78.5%", "BSNL", profile["identity"]["role"].upper(), profile["availability"]["status"])
+    required = (
+        "ayushroy.dev@gmail.com",
+        "KPIT Technologies",
+        "onboarding are pending",
+        "CandidateX",
+        "131 backend",
+        "28,800",
+        "synthetic candidate",
+        "Yor Talks V2",
+        "Yor Token Usage",
+        "BSNL",
+        profile["identity"]["role"],
+    )
     missing = [term for term in required if term not in text]
     if missing:
         raise RuntimeError(f"required resume evidence is missing: {', '.join(missing)}")
 
     annotations = sum(len(page.get("/Annots", [])) for page in reader.pages)
-    if annotations < 10:
+    if annotations < 7:
         raise RuntimeError("public resume lost one or more clickable links")
 
     metadata = reader.metadata or {}
     if metadata.get("/Creator") or metadata.get("/Producer"):
         raise RuntimeError("public resume contains tool or machine metadata")
-
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)

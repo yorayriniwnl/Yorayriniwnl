@@ -33,9 +33,10 @@ class PublicResumeTests(unittest.TestCase):
             resume.validate_resume(output)
             reader = resume.PdfReader(output)
             text = reader.pages[0].extract_text()
-            self.assertIn('BACKEND / FULL-STACK SOFTWARE ENGINEER', text)
-            self.assertIn('Open to software engineering roles', text)
+            self.assertIn('Backend / Full-Stack Software Engineer', text)
+            self.assertIn('KPIT Technologies - Associate Engineer 2027 (Campus Selection)', text)
             self.assertIn('Telecom & Data Network Intern', text)
+            self.assertNotIn('Associate Engineer · Automotive Technology Services', text)
             self.assertIn('Backend / Full-Stack Software Engineer', reader.metadata['/Title'])
 
     def test_header_role_line_stays_clear_of_contact_column(self):
