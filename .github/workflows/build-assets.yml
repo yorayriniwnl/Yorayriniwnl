@@ -68,6 +68,10 @@ jobs:
           python main/scripts/generate_assets.py
           python main/scripts/generate_motion.py
 
+      - name: Generate public resume PDF
+        working-directory: main
+        run: python scripts/generate_public_resume.py
+
       - name: Verify README and all profile contracts
         working-directory: main
         run: |
@@ -94,6 +98,7 @@ jobs:
           cp main/generated/*.svg output/
           cp main/generated/systems-reel*.gif output/
           cp main/generated/systems-reel*-still.png output/
+          cp main/output/pdf/Ayush_Roy_Resume_Public.pdf output/Ayush_Roy_Resume_Public.pdf
 
       - name: Commit if changed
         if: github.event_name != 'pull_request'
