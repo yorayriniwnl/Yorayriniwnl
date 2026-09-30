@@ -58,7 +58,7 @@
 
 <p align="center">
 <a href="https://www.yorayriniwnl.in"><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/nav-live.svg?rev=redline-v2" width="145" alt="Open Personal Developer Portfolio project"/></a>
-<a href="https://github.com/yorayriniwnl/Yor-Ayrin-iwnl"><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/nav-source.svg?rev=redline-v2" width="145" alt="Inspect Personal Developer Portfolio source repository"/></a>
+<a href="https://github.com/yorayriniwnl/Portfolio-Ayush-Roy"><img src="https://raw.githubusercontent.com/yorayriniwnl/Yorayriniwnl/output/nav-source.svg?rev=redline-v2" width="145" alt="Inspect Personal Developer Portfolio source repository"/></a>
 </p>
 
 </details>
