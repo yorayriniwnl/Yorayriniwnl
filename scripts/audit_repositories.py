@@ -202,7 +202,7 @@ REPO_OVERRIDES: dict[str, dict[str, Any]] = {
         "status": "EXPERIMENTAL",
         "intent": "Chrome MV3 multi-AI usage cockpit; permission, storage, privacy, and clear-data behavior need a dedicated README.",
         "pin_priority": None,
-    },,
+    },
     "Portfolio-Ayush-Roy": {
         "classification": "flagship-portfolio",
         "status": "VERIFIED",
