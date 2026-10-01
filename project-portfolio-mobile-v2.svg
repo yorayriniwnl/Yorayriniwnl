@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="720" height="400" viewBox="0 0 720 400" role="img" aria-labelledby="title desc">
 <title id="title">The product universe — Personal Developer Portfolio</title>
-<desc id="desc">Clean illustrative artwork for Personal Developer Portfolio. A focused portfolio with a lazy-loaded case-study architecture and a GPU-accelerated 4,000-point interface. 4,000 GPU-driven particles 24 tests across five Vitest suites Automated GitHub content synchronization</desc>
+<desc id="desc">Clean illustrative artwork for Personal Developer Portfolio. Recruiter-focused Next.js portfolio with evidence-backed case studies, verified project boundaries, accessibility checks, and browser QA. 4,000 GPU-driven particles 24 tests across five Vitest suites Automated GitHub content synchronization</desc>
 <defs>
 <radialGradient id="ambient"><stop stop-color="#7b1528" stop-opacity=".48"/><stop offset="1" stop-color="#080508" stop-opacity="0"/></radialGradient>
 <linearGradient id="edge"><stop stop-color="#ff6670"/><stop offset=".4" stop-color="#7a1a29"/><stop offset="1" stop-color="#070001"/></linearGradient>
