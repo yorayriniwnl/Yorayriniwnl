@@ -2969,7 +2969,7 @@ def generate_legacy_asset_set():
         {
             "filename": "project-talks", "kind": "talks", "code": "SYS-05",
             "domain": "REALTIME COMMS", "title": "YOR TALKS",
-            "stack": "REACT · NEXT.JS · FASTAPI · WEBSOCKET",
+            "stack": "REACT · VITE · EXPRESS · SOCKET.IO",
             "summary": "Bidirectional rooms, delivery, auth, and presence.",
         },
         {
