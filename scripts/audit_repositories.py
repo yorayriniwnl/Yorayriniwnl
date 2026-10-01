@@ -22,31 +22,34 @@ from typing import Any
 
 OWNER = "yorayriniwnl"
 DEFAULT_REPOSITORIES = (
-    "Yorayriniwnl",
-    "yor-talksv2",
-    "Yor-Helios",
-    "Yor-Talks",
-    "Hyperliquid_Analysis",
-    "C_PlusPlus",
-    "Yor-Feelings",
-    "yor-stories",
-    "yorayriniwnl.in2",
-    "Yorayriniwnl.in",
-    "Yor-Status",
-    "Landgrabbers_2",
-    "yor-story",
-    "CBSE-Result-Analyzer",
     "Yor-Solar-Nexus",
     "mentor-mentee-system",
-    "Yor-Store",
     "Yor-Zenith",
-    "Yor-Project-Health-Tracker",
     "Yor-Ai-vs-real-image",
     "Yor-Ayrin-iwnl",
+    "Yor-Helios",
+    "Yor-Feelings",
+    "Yorayriniwnl",
+    "Yor-Status",
+    "Yor-Talks",
     "Eat-a-lot",
+    "Yorayriniwnl.in",
+    "CBSE-Result-Analyzer",
     "Trading_Bot",
     "Taskflow",
+    "Hyperliquid_Analysis",
     "Yor_Token_Usage",
+    "Yor-Project-Health-Tracker",
+    "Yor-Store",
+    "Landgrabbers_2",
+    "yorayriniwnl.in2",
+    "yor-stories",
+    "yor-story",
+    "yor-talksv2",
+    "Portfolio-Ayush-Roy",
+    "CandidateX",
+    "Hybrid-Intelligent-Network-Intrusion-Detection-System",
+    "Yor-World",
 )
 
 REPO_OVERRIDES: dict[str, dict[str, Any]] = {
@@ -171,10 +174,10 @@ REPO_OVERRIDES: dict[str, dict[str, Any]] = {
         "pin_priority": 5,
     },
     "Yor-Ayrin-iwnl": {
-        "classification": "flagship-frontend",
-        "status": "VERIFIED",
-        "intent": "Focused 3D developer portfolio with case-study navigation and automated tests.",
-        "pin_priority": 1,
+        "classification": "legacy-portfolio",
+        "status": "LEGACY",
+        "intent": "Former portfolio implementation retained for historical context; the canonical recruiter-facing source is Portfolio-Ayush-Roy.",
+        "pin_priority": None,
     },
     "Eat-a-lot": {
         "classification": "demo-product",
@@ -199,7 +202,31 @@ REPO_OVERRIDES: dict[str, dict[str, Any]] = {
         "status": "EXPERIMENTAL",
         "intent": "Chrome MV3 multi-AI usage cockpit; permission, storage, privacy, and clear-data behavior need a dedicated README.",
         "pin_priority": None,
+    },,
+    "Portfolio-Ayush-Roy": {
+        "classification": "flagship-portfolio",
+        "status": "VERIFIED",
+        "intent": "Canonical recruiter-facing portfolio with evidence-backed case studies and browser QA.",
+        "pin_priority": 1,
     },
+    "CandidateX": {
+        "classification": "flagship-research",
+        "status": "RESEARCH_DEMO",
+        "intent": "Evidence-first candidate capability research system with explicit synthetic-data and decision-support boundaries.",
+        "pin_priority": 2,
+    },
+    "Hybrid-Intelligent-Network-Intrusion-Detection-System": {
+        "classification": "academic-ml-security",
+        "status": "RESEARCH_DEMO",
+        "intent": "Hybrid NIDS major-project prototype with bounded held-out-category experiments and explainability evidence.",
+        "pin_priority": None,
+    },
+    "Yor-World": {
+        "classification": "production-planning-workspace",
+        "status": "IN_DEVELOPMENT",
+        "intent": "Evidence-heavy planning and feasibility workspace for the next interactive portfolio generation.",
+        "pin_priority": None,
+    }
 }
 
 TEXT_SUFFIXES = {
