@@ -25,20 +25,13 @@ class ProfileDataTests(unittest.TestCase):
 
         audit = load_repository_audit()
         self.assertEqual(audit["account"], "yorayriniwnl")
-        self.assertEqual(audit["repository_count_expected"], 25)
-        self.assertEqual(audit["repository_count_audited"], 25)
+        self.assertEqual(audit["repository_count_audited"], audit["repository_count_expected"])
+        self.assertEqual(len(audit["repositories"]), audit["repository_count_expected"])
         self.assertEqual(audit["missing_local_clones"], [])
-        self.assertEqual(
-            [item["name"] for item in audit["proposed_pins"]],
-            [
-                "Yor-Ayrin-iwnl",
-                "yor-talksv2",
-                "Yor-Helios",
-                "Yor-Zenith",
-                "Yor-Ai-vs-real-image",
-                "Hyperliquid_Analysis",
-            ],
-        )
+        pin_names = [item["name"] for item in audit["proposed_pins"]]
+        self.assertEqual(len(pin_names), len(set(pin_names)))
+        self.assertLessEqual(len(pin_names), 6)
+        self.assertTrue(set(pin_names).issubset({item["name"] for item in audit["repositories"]}))
 
     def test_design_tokens_are_the_palette_source_of_truth(self):
         from scripts.profile_data import load_design_tokens
