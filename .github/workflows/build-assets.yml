@@ -46,6 +46,40 @@ jobs:
         with:
           path: main
 
+      - name: Reject oversized new source artwork
+        if: github.event_name == 'pull_request'
+        working-directory: main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin "${{ github.base_ref }}"
+          python - <<'PY'
+          import subprocess
+          from pathlib import Path
+
+          base = "origin/${{ github.base_ref }}"
+          changed = subprocess.check_output(
+              ["git", "diff", "--name-only", "--diff-filter=AM", f"{base}...HEAD", "--", "assets"],
+              text=True,
+          ).splitlines()
+
+          limit = 4 * 1024 * 1024
+          violations = []
+          for name in changed:
+              path = Path(name)
+              if not path.is_file():
+                  continue
+              size = path.stat().st_size
+              if size > limit:
+                  violations.append(f"{name}: {size} bytes")
+
+          assert not violations, (
+              "New or modified source artwork over 4 MiB must be optimized or moved "
+              "to a release/artifact store before merge:\n" + "\n".join(violations)
+          )
+          print(f"Checked {len(changed)} changed asset files")
+          PY
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -102,7 +136,7 @@ jobs:
 
       - name: Commit if changed
         if: github.event_name != 'pull_request'
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@b863ae1933cb653a53c021fe36dbb774e1fb9403 # v5
         with:
           repository: output
           commit_message: "chore: regenerate profile visual assets"
