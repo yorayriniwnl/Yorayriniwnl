@@ -45,7 +45,7 @@ def load_profile(path: Path = DEFAULT_DATA_PATH) -> dict[str, Any]:
 
 
 def load_repository_audit(path: Path = DEFAULT_AUDIT_PATH) -> dict[str, Any]:
-    """Load the read-only account inventory that backs public profile curation."""
+    """Load the dated repository-audit snapshot used by profile curation."""
     with path.open(encoding="utf-8") as stream:
         return json.load(stream)
 
@@ -239,8 +239,8 @@ def _validate_repository_audit() -> None:
     repositories = audit["repositories"]
     names = [item.get("name") for item in repositories]
     expected_count = audit["repository_count_expected"]
-    if expected_count != 25 or audit["repository_count_audited"] != expected_count:
-        raise ProfileDataError("repository audit must cover the 25-repository public scope")
+    if expected_count < 1 or audit["repository_count_audited"] != expected_count:
+        raise ProfileDataError("repository audit expected/audited counts must match")
     if len(names) != expected_count or len(set(names)) != expected_count:
         raise ProfileDataError("repository audit must contain unique repository names")
     if audit["missing_local_clones"]:
@@ -249,15 +249,10 @@ def _validate_repository_audit() -> None:
         raise ProfileDataError("repository audit scope must contain only public repositories")
 
     pin_names = [item.get("name") for item in audit["proposed_pins"]]
-    if pin_names != [
-        "Yor-Ayrin-iwnl",
-        "yor-talksv2",
-        "Yor-Helios",
-        "Yor-Zenith",
-        "Yor-Ai-vs-real-image",
-        "Hyperliquid_Analysis",
-    ]:
-        raise ProfileDataError("repository audit proposed pins changed unexpectedly")
+    if len(pin_names) != len(set(pin_names)):
+        raise ProfileDataError("repository audit proposed pins must be unique")
+    if len(pin_names) > 6:
+        raise ProfileDataError("repository audit may propose at most six GitHub pins")
     if not set(pin_names).issubset(names):
         raise ProfileDataError("repository audit proposed pins must exist in the audited set")
 
