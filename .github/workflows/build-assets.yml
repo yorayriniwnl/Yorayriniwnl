@@ -52,14 +52,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git fetch --no-tags --depth=1 origin "${{ github.base_ref }}"
+          git fetch --no-tags --depth=1 origin "${{ github.event.pull_request.base.sha }}"
           python - <<'PY'
           import subprocess
           from pathlib import Path
 
-          base = "origin/${{ github.base_ref }}"
+          base = "${{ github.event.pull_request.base.sha }}"
           changed = subprocess.check_output(
-              ["git", "diff", "--name-only", "--diff-filter=AM", f"{base}...HEAD", "--", "assets"],
+              ["git", "diff", "--name-only", "--diff-filter=AM", f"{base}..HEAD", "--", "assets"],
               text=True,
           ).splitlines()
 
