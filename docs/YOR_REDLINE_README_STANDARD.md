@@ -74,3 +74,30 @@ The actual headers use this contract in a more compact format.
 - [ ] Avoid claiming unmeasured results or production readiness.
 
 Visual consistency is a system, not a collection of identical banners.
+
+## V2: engineering dossier and navigation layer
+
+The completed repository-wide redesign extends the responsive V1 identity with two additional project-specific assets:
+
+- `docs/yor-redline-system.svg` (desktop system map, 1440 × 500)
+- `docs/yor-redline-system-mobile.svg` (mobile system map, 720 × 920)
+
+The README includes a single `<!-- YOR REDLINE / EXPERIENCE V2 -->` block before its first existing second-level section. Each V2 block provides:
+
+1. A four-stage conceptual workflow based on the documented scope of that repository, with project-specific labels and illustration.
+2. A compact **Project signal / Documented scope** table covering maturity, technical scope, and an explicit evidence boundary.
+3. Direct Markdown navigation to the source README's existing technical documentation sections.
+4. A responsive `<picture>` element with local SVG paths and descriptive alt text.
+
+Do not turn diagrams into unsourced implementation or performance claims. Research prototypes, historical archives, experiments, and empty repositories should be labeled distinctly. Main technical documentation must remain accessible and unchanged in substance.
+
+### Publication audit (V2)
+
+- **32 repositories discovered** in the linked GitHub account.
+- **28 non-profile, unarchived repositories** received the expanded V2 dossier, alongside their original V1 responsive covers. This includes two previously empty repositories that were initialized with honest placeholders.
+- **1 canonical profile repository** keeps its existing bespoke README and serves as the design source of truth.
+- **3 archived repositories** remain untouched because GitHub treats them as read-only.
+- Source-level verification confirmed the README V1/V2 markers, relative image references, and both new system-map SVG assets across all 28 target repositories.
+- **Limit of verification:** This does not constitute a complete rendered browser/device screenshot audit, nor does it certify live deployments or tests. A visual QA pass across GitHub desktop and mobile views is recommended after code-level checks.
+
+To revise the design later, update the V2 block and its corresponding local desktop/mobile SVG files together. Do not overwrite sections outside the marked block without independent review.
